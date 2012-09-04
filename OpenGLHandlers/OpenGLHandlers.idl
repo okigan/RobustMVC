@@ -1,0 +1,69 @@
+// OpenGLHandlers.idl : IDL source for OpenGLHandlers
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (OpenGLHandlers.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(227E2759-D4FA-415E-8A76-6C840CF1A043),
+	pointer_default(unique)
+]
+interface IPreview : IUnknown
+{
+};
+
+[
+	object,
+	uuid(1F587771-16AA-4C7C-8524-618ECE0A3277),
+	pointer_default(unique)
+]
+interface IThumbnail : IUnknown
+{
+};
+
+[
+	object,
+	uuid(5AA998DD-56CE-4196-B411-2C6FA7E94648),
+	pointer_default(unique)
+]
+interface ISearch : IUnknown
+{
+};
+
+[
+	uuid(5D416A8C-BD93-4298-9308-479614D4DF4A),
+	version(1.0),
+]
+library OpenGLHandlersLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(B98BFABA-7E02-466E-950D-6F3A242E9FCF)
+	]
+	coclass Preview
+	{
+		[default] interface IPreviewHandler;
+	};
+	[
+		uuid(14D53C71-D2B1-4762-B6D4-94DCBE775549)
+	]
+	coclass Thumbnail
+	{
+		[default] interface IThumbnailProvider;
+	};
+	[
+		uuid(BB9CC67C-BFF6-422F-8F79-2756373EEDD9)
+	]
+	coclass Search
+	{
+		[default] interface IFilter;
+	};
+};
+
+import "shobjidl.idl";
+import "thumbcache.idl";
+import "filter.idl";
