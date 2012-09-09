@@ -36,11 +36,13 @@ display()
     //glEnd();
 
     glBegin(GL_QUADS);
-    /*glColor3f(1.0f, 0.0f, 0.0f);  */  glVertex2i(0,  0);
-    /*glColor3f(0.0f, 1.0f, 0.0f);  */  glVertex2i(1,  0);
-    /*glColor3f(0.0f, 0.0f, 1.0f);  */  glVertex2i(1,  1);
-    /*glColor3f(0.0f, 0.0f, 1.0f);  */  glVertex2i(0,  1);
-    glEnd();
+	{
+		glColor3f(0.0f, 0.0f, 0.0f);   glVertex2i(0,  0);
+		glColor3f(1.0f, 0.0f, 0.0f);   glVertex2i(1,  0);
+		glColor3f(1.0f, 1.0f, 0.0f);   glVertex2i(1,  1);
+		glColor3f(0.0f, 1.0f, 0.0f);   glVertex2i(0,  1);
+	}
+	glEnd();
 
 }
 
@@ -82,7 +84,7 @@ void InitShader(const GLchar *vSource , const GLchar* fSource)
     checkError(status, "Failed to compile the vertex shader.");
 
     glGetShaderiv(fShader, GL_COMPILE_STATUS, &status);
-    glGetShaderInfoLog(vShader, sizeof(logbuffer), &loglen, logbuffer);
+    glGetShaderInfoLog(fShader, sizeof(logbuffer), &loglen, logbuffer);
     checkError(status, "Failed to compile the fragment shader.");
 
     /* link */

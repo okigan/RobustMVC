@@ -101,30 +101,12 @@ void COpenGLView::OnDraw(CDC* pDC)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    //GLfloat lightColor0[] = {0.5f, 0.0f, 0.2f, 1.0f};
-    //GLfloat lightPos0[] = {-1.0f, 0.5f, -0.5f, 0.0f};
-    //glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
-    //glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+    glUseProgram(0);
+    display();
 
-    //glEnable(GL_SHADE_MODEL);
-    ////glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_LIGHT0);
-    //glEnable(GL_LIGHTING); 
-    //glShadeModel(GL_SMOOTH);
+	glTranslated(1.5, 0, 0);
 
-    //glClear(GL_FRONT_AND_BACK);
-    //{
-    //    GLUquadricObj *quadric=gluNewQuadric();
-    //    gluQuadricNormals(quadric, GLU_SMOOTH);
-
-    //    gluSphere(quadric, 1, 8, 8);
-
-    //    gluDeleteQuadric(quadric);
-    //}
-
-    glUseProgram(program);
-    //checkError(glGetError()==GL_NO_ERROR, "Failed to link the shader program object.");
-
+	glUseProgram(program);
     display();
 
 
@@ -300,7 +282,7 @@ int COpenGLView::OnCreate(LPCREATESTRUCT lpCreateStruct)
         "varying float y;                                                               "
         "void main() {                                                                  "
         "   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                     "
-        "   gl_FrontColor = gl_Position; "
+        "   gl_FrontColor = gl_Vertex; "
         "   x = gl_Vertex.x;                                                          "
         "   y = gl_Vertex.y;                                                          "
         "}                                                                              "
@@ -336,10 +318,12 @@ int COpenGLView::OnCreate(LPCREATESTRUCT lpCreateStruct)
         "varying float y;                                                               "
        "void main()                         "
         "{                                   "
-        "    float grey = 0;                                                            "
-//        "    if( x <= 1 && y <= 1 )                                                     "
-        "        grey = x + y; "
-        "    gl_FragColor = vec4(grey, grey, grey, 1);        "
+		"    float r = sqrt(x*x + y*y);                                                            "
+		"    if( r <= 1 ) {                                                     "
+        "        gl_FragColor = gl_Color;        "
+		"    } else  {											"
+		"        gl_FragColor = vec4(0, 0, 0, 1);				"
+		"	}"
         "}                                   "
     ;
 
