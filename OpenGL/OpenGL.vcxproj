@@ -14,6 +14,7 @@
     <ProjectGuid>{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}</ProjectGuid>
     <RootNamespace>OpenGL</RootNamespace>
     <Keyword>MFCProj</Keyword>
+    <ProjectName>Application</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -34,14 +35,14 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\props\glew-1.9" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\props\glew-1.9" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
@@ -106,7 +107,7 @@
   <ItemGroup>
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="MainFrm.h" />
-    <ClInclude Include="OpenGL.h" />
+    <ClInclude Include="OpenGLApp.h" />
     <ClInclude Include="OpenGLDoc.h" />
     <ClInclude Include="OpenGLView.h" />
     <ClInclude Include="Resource.h" />
@@ -116,7 +117,7 @@
   <ItemGroup>
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="OpenGL.cpp" />
+    <ClCompile Include="OpenGLApp.cpp" />
     <ClCompile Include="OpenGLDoc.cpp" />
     <ClCompile Include="OpenGLView.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -127,7 +128,17 @@
   <ItemGroup>
     <ResourceCompile Include="OpenGL.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Visualization\Visualization.vcxproj">
+      <Project>{660e822a-d04d-4c14-8935-dc58fc46b92a}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="OpenGL.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

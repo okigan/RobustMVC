@@ -6,7 +6,7 @@
 // SHARED_HANDLERS can be defined in an ATL project implementing preview, thumbnail
 // and search filter handlers and allows sharing of document code with that project.
 #ifndef SHARED_HANDLERS
-#include "OpenGL.h"
+#include "OpenGLApp.h"
 #endif
 
 #include "OpenGLDoc.h"
@@ -29,12 +29,17 @@ END_MESSAGE_MAP()
 
 COpenGLDoc::COpenGLDoc()
 {
-	// TODO: add one-time construction code here
-
+	m_PixelFormat = -1;
+    m_RenderingContext = NULL;
 }
 
 COpenGLDoc::~COpenGLDoc()
 {
+    wglDeleteContext(m_RenderingContext);
+
+    m_RenderingContext = NULL;
+
+
 }
 
 BOOL COpenGLDoc::OnNewDocument()
@@ -135,3 +140,24 @@ void COpenGLDoc::Dump(CDumpContext& dc) const
 
 
 // COpenGLDoc commands
+
+
+int COpenGLDoc::GetPixelFormat(void)
+{
+    return m_PixelFormat;
+}
+
+void COpenGLDoc::SetPixelFormat(int pixelFormat)
+{
+    m_PixelFormat = pixelFormat;
+}
+
+HGLRC COpenGLDoc::GetRenderingContext(void)
+{
+    return m_RenderingContext;
+}
+
+void COpenGLDoc::SetRenderingContext(HGLRC renderingContext)
+{
+    m_RenderingContext = renderingContext;
+}

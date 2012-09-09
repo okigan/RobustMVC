@@ -3,7 +3,7 @@
 //
 
 #include "stdafx.h"
-#include "OpenGL.h"
+#include "OpenGLApp.h"
 
 #include "ChildFrm.h"
 
@@ -30,17 +30,19 @@ CChildFrame::~CChildFrame()
 {
 }
 
-BOOL CChildFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/, CCreateContext* pContext)
-{
-	return m_wndSplitter.Create(this,
-		2, 2,			// TODO: adjust the number of rows, columns
-		CSize(10, 10),	// TODO: adjust the minimum pane size
-		pContext);
-}
+//BOOL CChildFrame::OnCreateClient(LPCREATESTRUCT /*lpcs*/, CCreateContext* pContext)
+//{
+//	return m_wndSplitter.Create(this,
+//		2, 2,			// TODO: adjust the number of rows, columns
+//		CSize(10, 10),	// TODO: adjust the minimum pane size
+//        pContext, WS_CHILD | WS_VISIBLE |
+//        WS_HSCROLL | WS_VSCROLL | SPLS_DYNAMIC_SPLIT | WS_CLIPCHILDREN);
+//}
 
 BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: Modify the Window class or styles here by modifying the CREATESTRUCT cs
+    cs.style |= WS_CLIPCHILDREN;
+	
 	if( !CMDIChildWndEx::PreCreateWindow(cs) )
 		return FALSE;
 

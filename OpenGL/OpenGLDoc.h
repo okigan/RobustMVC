@@ -45,4 +45,15 @@ protected:
 	// Helper function that sets search content for a Search Handler
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
+public:
+    int GetPixelFormat(void);
+    void SetPixelFormat(int pixelFormat);
+
+    HGLRC GetRenderingContext(void);
+    void SetRenderingContext(HGLRC renderingContext);
+
+
+private:
+    int m_PixelFormat;
+    HGLRC m_RenderingContext;
 };
