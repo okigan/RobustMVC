@@ -10,6 +10,7 @@
 #include <Core/Model.h>
 
 class QuadModel;
+class QuadModelController;
 
 
 
@@ -72,7 +73,8 @@ private:
 
 private:
     std::unique_ptr<QuadModel> m_QuadModel;
+    std::unique_ptr<QuadModelController> m_QuadModelController;
+
 public:
-    afx_msg void OnCommandIncrease();
-    afx_msg void OnCommandDecrease();
+    afx_msg BOOL OnCommand(UINT id);
 };

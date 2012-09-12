@@ -11,7 +11,7 @@ public:
 };
 
 void
-display();
+draw_quad();
 
 
-GLuint InitShader(const GLchar *vSource , const GLchar* fSource);
+GLuint init_shader(const GLchar *vSource , const GLchar* fSource);

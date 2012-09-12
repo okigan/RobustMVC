@@ -23,7 +23,9 @@
 #include <gl/GLU.h>
 #pragma comment(lib, "glu32.lib")
 
-#include "../Visualization/Visualization.h"
+#include <Visualization/Visualization.h>
+
+#include <Visualization/Render/QuadModelRender.h>
 
 
 
@@ -54,7 +56,6 @@ END_MESSAGE_MAP()
 
 COpenGLView::COpenGLView()
 {
-	m_program = 0;
 	EnableActiveAccessibility();
 }
 
@@ -107,17 +108,21 @@ void COpenGLView::OnDraw(CDC* pDC)
     glTranslated(-1.5, 0, 0);
 
     glUseProgram(0);
-    display();
+    draw_quad();
 
     glTranslated(1.5, 0, 0);
 
 
-    glUseProgram(m_program);
-    GLint location = glGetUniformLocation(m_program, "radius");
-    glUniform1f(location, (float)GetDocument()->GetQuadModel()->GetRadius());
-    display();
+    //glUseProgram(m_program);
+    //GLint location = glGetUniformLocation(m_program, "radius");
+    //glUniform1f(location, (float)GetDocument()->GetQuadModel()->GetRadius());
+    //display();
 
+    if( nullptr != m_QuadModelRender ) {
+        m_QuadModelRender->Render();
+    }
 
+    glFinish();
 
     bRet = SwapBuffers(hDC);
 
@@ -244,11 +249,12 @@ int COpenGLView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     int pixelFormat = GetDocument()->GetPixelFormat();
 
     CDC* pDC = GetDC();
-    HDC hDC = pDC->GetSafeHdc();
-    bool isPrinting = pDC->IsPrinting() != FALSE;
+    {
+        HDC hDC = pDC->GetSafeHdc();
+        bool isPrinting = pDC->IsPrinting() != FALSE;
 
-    pixelFormat = InitializeDeviceContext(pixelFormat, hDC, isPrinting);
-
+        pixelFormat = InitializeDeviceContext(pixelFormat, hDC, isPrinting);
+    }
     ReleaseDC(pDC);
 
     return 0;
@@ -308,34 +314,28 @@ int COpenGLView::InitializeDeviceContext( int pixelFormat, HDC hDC, bool isPrint
     if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
         exit(1);
 
-    GLchar* vSource = 
-        "varying float x;                                                               "
-        "varying float y;                                                               "
-        "void main() {                                                                  "
-        "   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                     "
-        "   gl_FrontColor = gl_Vertex;													"
-        "   x = gl_Vertex.x;															"
-        "   y = gl_Vertex.y;															"
-        "}                                                                              "
-        ;
-
-    GLchar* fSource = ""
-        "uniform float radius = 1.0;                                                    "
-        "varying float x;                                                               "
-        "varying float y;                                                               "
-        "void main()                         											"
-        "{                                   											"
-        "    float r = sqrt(x*x + y*y);                                                 "
-        "    if( r <= radius ) {                                                     	"
-        "        gl_FragColor = gl_Color;        										"
-        "    } else  {																	"
-        "        gl_FragColor = vec4(0, 0, 0, 1);										"
-        "	}																			"
-        "}                                   											"
-        ;
-
-    m_program = InitShader(vSource, fSource);
-
     bRet = wglMakeCurrent(NULL, NULL);
     return pixelFormat;
+}
+
+
+void COpenGLView::OnInitialUpdate()
+{
+    CView::OnInitialUpdate();
+
+    m_QuadModelRender.reset(new QuadModelRender());
+
+    m_QuadModelRender->SetQuadModel(GetDocument()->GetQuadModel());
+
+    CDC* pDC = GetDC();
+    HDC hDC = pDC->GetSafeHdc();
+    HGLRC hRC = GetDocument()->GetRenderingContext();
+
+    BOOL bRet = wglMakeCurrent(hDC, hRC);
+    {
+        m_QuadModelRender->Initialize(hDC, hRC);
+    }
+    bRet = wglMakeCurrent(NULL, NULL);
+
+    ReleaseDC(pDC);
 }

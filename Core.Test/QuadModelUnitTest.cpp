@@ -2,7 +2,8 @@
 
 #pragma managed(push, off)
 
-#include "Core/Model/QuadModel.h"
+#include <Core/Model/QuadModel.h>
+#include <Core/Controller/QuadModelController.h>
 
 #pragma managed(pop)
 
@@ -72,6 +73,23 @@ namespace CoreTest
             Assert::AreEqual(true, x.called);
         }
 
+        [TestMethod]
+        void TestContoller()
+        {
+            QuadModel model;
+            QuadModelController controller;
 
+            controller.SetModel(&model);
+
+            double radius = model.GetRadius();
+
+            controller.IncreaseRadius();
+
+            Assert::IsTrue(radius < model.GetRadius());
+
+            controller.DecreaseRadius();
+
+            Assert::AreEqual(radius, model.GetRadius());
+        }
 	};
 }

@@ -14,7 +14,8 @@
 
 #include <propkey.h>
 
-#include "Core/Model/QuadModel.h"
+#include <Core/Model/QuadModel.h>
+#include <Core/Controller/QuadModelController.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -25,8 +26,8 @@
 IMPLEMENT_DYNCREATE(COpenGLDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(COpenGLDoc, CDocument)
-    ON_COMMAND(ID_COMMAND_INCREASE, &COpenGLDoc::OnCommandIncrease)
-    ON_COMMAND(ID_COMMAND_DECREASE, &COpenGLDoc::OnCommandDecrease)
+    ON_COMMAND_EX(ID_COMMAND_INCREASE, &COpenGLDoc::OnCommand)
+    ON_COMMAND_EX(ID_COMMAND_DECREASE, &COpenGLDoc::OnCommand)
 END_MESSAGE_MAP()
 
 
@@ -38,6 +39,9 @@ COpenGLDoc::COpenGLDoc()
     m_RenderingContext = NULL;
 
     m_QuadModel.reset(new QuadModel());
+    m_QuadModelController.reset(new QuadModelController());
+
+    m_QuadModelController->SetModel(m_QuadModel.get());
 
     Model::Callback callback = std::bind(&COpenGLDoc::OnPropertyChangeCallback, this, std::placeholders::_1);
 
@@ -198,13 +202,13 @@ const QuadModel * COpenGLDoc::GetQuadModel() const
 }
 
 
-void COpenGLDoc::OnCommandIncrease()
+BOOL COpenGLDoc::OnCommand(UINT id)
 {
-    m_QuadModel->SetRadius(m_QuadModel->GetRadius() + 0.1);
-}
+    switch( id )
+    {
+    case ID_COMMAND_INCREASE: m_QuadModelController->IncreaseRadius(); break;
+    case ID_COMMAND_DECREASE: m_QuadModelController->DecreaseRadius(); break;
+    }
 
-
-void COpenGLDoc::OnCommandDecrease()
-{
-    m_QuadModel->SetRadius(m_QuadModel->GetRadius() - 0.1);
+    return TRUE;
 }

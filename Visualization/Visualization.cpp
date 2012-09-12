@@ -24,17 +24,8 @@ Visualization::~Visualization(void)
 }
 
 
-void
-    display()
+void draw_quad()
 {
-    /* rotate a triangle around */
-    //glClear(GL_COLOR_BUFFER_BIT);
-    //glBegin(GL_TRIANGLES);
-    //glColor3f(1.0f, 0.0f, 0.0f);    glVertex2i(0,  1);
-    //glColor3f(0.0f, 1.0f, 0.0f);    glVertex2i(-1, -1);
-    //glColor3f(0.0f, 0.0f, 1.0f);    glVertex2i(1, -1);
-    //glEnd();
-
     glBegin(GL_QUADS);
     {
         glColor3f(0.0f, 0.0f, 0.0f);   glVertex2i(0,  0);
@@ -47,7 +38,7 @@ void
 }
 
 GLuint program = 0;
-void checkError(GLint status, const char *msg)
+void check_error(GLint status, const char *msg)
 {
     if (!status)
     {
@@ -56,7 +47,7 @@ void checkError(GLint status, const char *msg)
     }
 }
 
-GLuint InitShader(const GLchar *vSource , const GLchar* fSource)
+GLuint init_shader(const GLchar *vSource , const GLchar* fSource)
 {
     GLint status = glGetError()==GL_NO_ERROR; 
 
@@ -80,11 +71,11 @@ GLuint InitShader(const GLchar *vSource , const GLchar* fSource)
 
     glGetShaderiv(vShader, GL_COMPILE_STATUS, &status);
     glGetShaderInfoLog(vShader, sizeof(logbuffer), &loglen, logbuffer);
-    checkError(status, "Failed to compile the vertex shader.");
+    check_error(status, "Failed to compile the vertex shader.");
 
     glGetShaderiv(fShader, GL_COMPILE_STATUS, &status);
     glGetShaderInfoLog(fShader, sizeof(logbuffer), &loglen, logbuffer);
-    checkError(status, "Failed to compile the fragment shader.");
+    check_error(status, "Failed to compile the fragment shader.");
 
     /* link */
 
@@ -92,7 +83,7 @@ GLuint InitShader(const GLchar *vSource , const GLchar* fSource)
     glGetProgramiv(program, GL_LINK_STATUS, &status);
     glGetProgramInfoLog(program, sizeof(logbuffer), &loglen, logbuffer);
 
-    checkError(status, "Failed to link the shader program object.");
+    check_error(status, "Failed to link the shader program object.");
 
     return program;
 }

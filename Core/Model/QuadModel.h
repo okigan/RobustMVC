@@ -9,6 +9,11 @@ public:
     QuadModel(void);
     ~QuadModel(void);
 
+    enum e_property_ids
+    {
+        e_radius,
+    };
+
 public:
 
     double GetRadius() const;

@@ -7,6 +7,10 @@
 #include <gl/glew.h>
 #include <gl/GL.h>
 
+#include <memory>
+
+class QuadModelRender;
+
 class COpenGLView : public CView
 {
 protected: // create from serialization only
@@ -54,9 +58,11 @@ protected:
 
     int InitializeDeviceContext( int pixelFormat, HDC hDC, bool isPrinting );
 
+protected:
+    std::unique_ptr<QuadModelRender> m_QuadModelRender;
 
-private:
-	GLuint m_program;
+public:
+    virtual void OnInitialUpdate();
 };
 
 #ifndef _DEBUG  // debug version in OpenGLView.cpp

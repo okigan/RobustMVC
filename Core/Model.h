@@ -7,7 +7,7 @@
 class Model
 {
 public:
-    enum Stage
+    enum stage
     {
         e_changing,
         e_changed,
@@ -16,22 +16,22 @@ public:
     struct callback_params
     {
         Model*  model;
-        Stage   stage;
+        stage   stage;
         int     property_id;
     };
 
     typedef std::function<void (const callback_params &)> Callback;
 
     void SetCallback(Callback & callback);
+
     uint8_t GetChangeStamp() const;
 
 protected:
     Model(void);
-    ~Model(void);
+    virtual ~Model(void);
 
     void _NotifyPropertyChanging(int property_id);
     void _NotifyPropertyChanged(int property_id);
-
 
 private:
     void _Touch();
