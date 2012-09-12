@@ -1,0 +1,8 @@
+bin
+objs
+TestResults
+*.sdf
+*.suo
+**.vcxproj.filters
+**.vcxproj.user
+**.aps

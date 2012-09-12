@@ -12,6 +12,8 @@
 #include "OpenGLDoc.h"
 #include "OpenGLView.h"
 
+#include <Core/Model/QuadModel.h>
+
 #include <gl/glew.h>
 #pragma comment(lib, "glew32.lib")
 
@@ -52,6 +54,7 @@ END_MESSAGE_MAP()
 
 COpenGLView::COpenGLView()
 {
+	m_program = 0;
 	EnableActiveAccessibility();
 }
 
@@ -75,10 +78,10 @@ BOOL COpenGLView::PreCreateWindow(CREATESTRUCT& cs)
 
 void COpenGLView::OnDraw(CDC* pDC)
 {
-	COpenGLDoc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
-	if (!pDoc)
-		return;
+    COpenGLDoc* pDoc = GetDocument();
+    ASSERT_VALID(pDoc);
+    if (!pDoc)
+        return;
 
     CRect rcClient;
     GetClientRect(&rcClient);
@@ -101,16 +104,20 @@ void COpenGLView::OnDraw(CDC* pDC)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    glTranslated(-1.5, 0, 0);
+
     glUseProgram(0);
     display();
 
-	glTranslated(1.5, 0, 0);
+    glTranslated(1.5, 0, 0);
 
-	glUseProgram(program);
+
+    glUseProgram(m_program);
+    GLint location = glGetUniformLocation(m_program, "radius");
+    glUniform1f(location, (float)GetDocument()->GetQuadModel()->GetRadius());
     display();
 
 
-    //GLint timeParam = glGetUniformLocation(program, "time");
 
     bRet = SwapBuffers(hDC);
 
@@ -179,7 +186,7 @@ COpenGLDoc* COpenGLView::GetDocument() const // non-debug version is inline
 #endif //_DEBUG
 
 
-int ChoosePixelFormat(CDC* pDC) 
+int ChoosePixelFormat(HDC hDC, bool isPrinting) 
 {
     PIXELFORMATDESCRIPTOR pfd = {0};
 
@@ -213,21 +220,17 @@ int ChoosePixelFormat(CDC* pDC)
     pfd.dwVisibleMask	= 0;
     pfd.dwDamageMask	= 0;
 
-    if( pDC->IsPrinting() == TRUE ) {
+    if( isPrinting ) {
         pfd.dwFlags			= 
             PFD_DRAW_TO_BITMAP	|
             PFD_SUPPORT_OPENGL	|
             PFD_SUPPORT_GDI;
     }
 
-    int iPixelFormat = ChoosePixelFormat(pDC->m_hAttribDC, &pfd);
+    int iPixelFormat = ChoosePixelFormat(hDC, &pfd);
 
     return iPixelFormat;
 }
-
-
-
-
 
 
 // COpenGLView message handlers
@@ -242,94 +245,9 @@ int COpenGLView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
     CDC* pDC = GetDC();
     HDC hDC = pDC->GetSafeHdc();
+    bool isPrinting = pDC->IsPrinting() != FALSE;
 
-    BOOL bRet = FALSE;
-
-    if( pixelFormat < 0 ) {
-        pixelFormat = ChoosePixelFormat(pDC);
-
-        GetDocument()->SetPixelFormat(pixelFormat);
-    }
-
-    PIXELFORMATDESCRIPTOR pfd = {0};
-    pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
-    pfd.nVersion = 1;
-
-    bRet = ::SetPixelFormat(hDC, pixelFormat, &pfd);
-
-    HGLRC hRC = GetDocument()->GetRenderingContext();
-    
-    if( NULL == hRC) {
-        hRC = wglCreateContext(hDC);
-
-        GetDocument()->SetRenderingContext(hRC);
-    }
-
-   bRet = wglMakeCurrent(hDC, hRC);
- 
-    GLenum err = glewInit();
-    if (GLEW_OK != err)
-    {
-        /* Problem: glewInit failed, something is seriously wrong. */
-        fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-    }
-
-    if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
-        exit(1);
-
-    GLchar* vSource = 
-        "varying float x;                                                               "
-        "varying float y;                                                               "
-        "void main() {                                                                  "
-        "   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                     "
-        "   gl_FrontColor = gl_Vertex; "
-        "   x = gl_Vertex.x;                                                          "
-        "   y = gl_Vertex.y;                                                          "
-        "}                                                                              "
-        ;
-
-        //"uniform float time;                                                           "
-        //"                                                                              "
-        //"void main()                                                                   "
-        //"{                                                                             "
-        //"    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                   "
-        //"                                                                              "
-        //"    vec4 eyePosition = gl_ModelViewMatrix * gl_Vertex;                        "
-        //"    vec4 eyeLightPos = gl_LightSource[0].position;                            "
-        //"                                                                              "
-        //"    vec3 eyeNormalVec = normalize(gl_NormalMatrix * gl_Normal);               "
-        //"    vec3 eyeLightVec = normalize(eyeLightPos.xyz - eyePosition.xyz);          "
-        //"    vec3 eyeViewVec = -normalize(eyePosition.xyz);                            "
-        //"    vec3 eyeHalfVec = normalize(eyeLightVec + eyeViewVec);                    "
-        //"                                                                              "
-        //"    float Kd = max(dot(eyeLightVec, eyeNormalVec), 0.0);                      "
-        //"    float Ks = pow(dot(eyeNormalVec, eyeHalfVec),                             "
-        //"    gl_FrontMaterial.shininess);                                              "
-        //"    float Ka = 1.0;                                                           "
-        //"                                                                              "
-        //"    gl_FrontColor = Kd * gl_FrontLightProduct[0].diffuse +                    "
-        //"                Ks * gl_FrontLightProduct[0].specular +                       "
-        //"            gl_FrontLightModelProduct.sceneColor;                             "
-        //"}                                                                             "
-        //;
-
-    GLchar* fSource = ""
-        "varying float x;                                                               "
-        "varying float y;                                                               "
-       "void main()                         "
-        "{                                   "
-		"    float r = sqrt(x*x + y*y);                                                            "
-		"    if( r <= 1 ) {                                                     "
-        "        gl_FragColor = gl_Color;        "
-		"    } else  {											"
-		"        gl_FragColor = vec4(0, 0, 0, 1);				"
-		"	}"
-        "}                                   "
-    ;
-
-    InitShader(vSource, fSource);
-
-    bRet = wglMakeCurrent(NULL, NULL);
+    pixelFormat = InitializeDeviceContext(pixelFormat, hDC, isPrinting);
 
     ReleaseDC(pDC);
 
@@ -352,6 +270,72 @@ void COpenGLView::OnDestroy()
 void COpenGLView::OnSize(UINT nType, int cx, int cy)
 {
     CView::OnSize(nType, cx, cy);
+}
 
-    RedrawWindow();
+int COpenGLView::InitializeDeviceContext( int pixelFormat, HDC hDC, bool isPrinting )
+{
+    BOOL bRet = FALSE;
+
+    if( pixelFormat < 0 ) {
+        pixelFormat = ChoosePixelFormat(hDC, isPrinting);
+
+        GetDocument()->SetPixelFormat(pixelFormat);
+    }
+
+    PIXELFORMATDESCRIPTOR pfd = {0};
+    pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
+    pfd.nVersion = 1;
+
+    bRet = ::SetPixelFormat(hDC, pixelFormat, &pfd);
+
+    HGLRC hRC = GetDocument()->GetRenderingContext();
+
+    if( NULL == hRC) {
+        hRC = wglCreateContext(hDC);
+
+        GetDocument()->SetRenderingContext(hRC);
+    }
+
+    bRet = wglMakeCurrent(hDC, hRC);
+
+    GLenum err = glewInit();
+    if (GLEW_OK != err)
+    {
+        /* Problem: glewInit failed, something is seriously wrong. */
+        fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+    }
+
+    if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
+        exit(1);
+
+    GLchar* vSource = 
+        "varying float x;                                                               "
+        "varying float y;                                                               "
+        "void main() {                                                                  "
+        "   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                     "
+        "   gl_FrontColor = gl_Vertex;													"
+        "   x = gl_Vertex.x;															"
+        "   y = gl_Vertex.y;															"
+        "}                                                                              "
+        ;
+
+    GLchar* fSource = ""
+        "uniform float radius = 1.0;                                                    "
+        "varying float x;                                                               "
+        "varying float y;                                                               "
+        "void main()                         											"
+        "{                                   											"
+        "    float r = sqrt(x*x + y*y);                                                 "
+        "    if( r <= radius ) {                                                     	"
+        "        gl_FragColor = gl_Color;        										"
+        "    } else  {																	"
+        "        gl_FragColor = vec4(0, 0, 0, 1);										"
+        "	}																			"
+        "}                                   											"
+        ;
+
+    m_program = InitShader(vSource, fSource);
+
+    bRet = wglMakeCurrent(NULL, NULL);
+    return pixelFormat;
 }

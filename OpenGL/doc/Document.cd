@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="COpenGLDoc">
+    <Position X="5.25" Y="2.25" Width="1.5" />
+    <AssociationLine Name="m_QuadModel" Type="std::unique_ptr&lt;_Ty, _Dx&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.199" Y="0.11" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEEUBBCACAEAgAAgISggQAAAAgAAAAAAAAA=</HashCode>
+      <FileName>OpenGLDoc.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_QuadModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="COpenGLView">
+    <Position X="8.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAFAAAAACAJAgABAgCAAAAAgAAgJAAAYCQA=</HashCode>
+      <FileName>OpenGLView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="std::unique_ptr&lt;_Ty, _Dx&gt;">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Typedef Name="std::unique_ptr&lt;_Ty, _Dx&gt;::_Myt" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\memory</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="std::unique_ptr&lt;_Ty, _Dx&gt;::_Mybase" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\memory</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="std::unique_ptr&lt;_Ty, _Dx&gt;::pointer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\memory</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="std::unique_ptr&lt;_Ty, _Dx&gt;::element_type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\memory</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="std::unique_ptr&lt;_Ty, _Dx&gt;::deleter_type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\memory</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAAAAAAEAAAAAAAAAEAAQgAAAAAAAAAAAQAgAIAAAIE=</HashCode>
+      <FileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\memory</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CView" Collapsed="true">
+    <Position X="8.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIKBACQAAEBSEACCmABgjSAAgCQQEISAAAwYKgEoFQA=</HashCode>
+      <FileName>c:\program files (x86)\microsoft visual studio 10.0\vc\atlmfc\include\afxwin.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_pDocument" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CDocument" Collapsed="true">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>F0iRGAEE3hIQGAghCcMKuCJisGjggtJWHCDsAwAQ4qA=</HashCode>
+      <FileName>c:\program files (x86)\microsoft visual studio 10.0\vc\atlmfc\include\afxwin.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

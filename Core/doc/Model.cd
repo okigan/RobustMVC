@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="QuadModel">
+    <Position X="5.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAQAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAiAAAA=</HashCode>
+      <FileName>Model\QuadModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model">
+    <Position X="0.5" Y="0.5" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Model::Stage">
+        <TypeIdentifier>
+          <NewMemberFileName>Model.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Struct Name="Model::callback_params">
+        <TypeIdentifier>
+          <NewMemberFileName>Model.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Typedef Name="Model::Callback" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAgAUAAAAAAAAQAAgAAAAAAAA=</HashCode>
+      <FileName>Model.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

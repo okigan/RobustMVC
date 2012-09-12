@@ -5,6 +5,14 @@
 
 #pragma once
 
+#include <memory>
+
+#include <Core/Model.h>
+
+class QuadModel;
+
+
+
 
 class COpenGLDoc : public CDocument
 {
@@ -52,8 +60,19 @@ public:
     HGLRC GetRenderingContext(void);
     void SetRenderingContext(HGLRC renderingContext);
 
+public:
+    const QuadModel * GetQuadModel() const;
+
+private:
+    void OnPropertyChangeCallback(const Model::callback_params &);
 
 private:
     int m_PixelFormat;
     HGLRC m_RenderingContext;
+
+private:
+    std::unique_ptr<QuadModel> m_QuadModel;
+public:
+    afx_msg void OnCommandIncrease();
+    afx_msg void OnCommandDecrease();
 };

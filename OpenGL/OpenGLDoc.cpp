@@ -10,8 +10,11 @@
 #endif
 
 #include "OpenGLDoc.h"
+#include "resource.h"
 
 #include <propkey.h>
+
+#include "Core/Model/QuadModel.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,6 +25,8 @@
 IMPLEMENT_DYNCREATE(COpenGLDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(COpenGLDoc, CDocument)
+    ON_COMMAND(ID_COMMAND_INCREASE, &COpenGLDoc::OnCommandIncrease)
+    ON_COMMAND(ID_COMMAND_DECREASE, &COpenGLDoc::OnCommandDecrease)
 END_MESSAGE_MAP()
 
 
@@ -31,6 +36,12 @@ COpenGLDoc::COpenGLDoc()
 {
 	m_PixelFormat = -1;
     m_RenderingContext = NULL;
+
+    m_QuadModel.reset(new QuadModel());
+
+    Model::Callback callback = std::bind(&COpenGLDoc::OnPropertyChangeCallback, this, std::placeholders::_1);
+
+    m_QuadModel->SetCallback(callback);
 }
 
 COpenGLDoc::~COpenGLDoc()
@@ -160,4 +171,40 @@ HGLRC COpenGLDoc::GetRenderingContext(void)
 void COpenGLDoc::SetRenderingContext(HGLRC renderingContext)
 {
     m_RenderingContext = renderingContext;
+}
+
+void COpenGLDoc::OnPropertyChangeCallback( const Model::callback_params & params)
+{
+    if( params.model == m_QuadModel.get() )
+    {
+        if( Model::e_changing == params.stage )
+        {
+
+        }
+        else
+        {
+            UpdateAllViews(NULL, 0, 0);
+        }
+    }
+    else
+    {
+
+    }
+}
+
+const QuadModel * COpenGLDoc::GetQuadModel() const
+{
+    return m_QuadModel.get();
+}
+
+
+void COpenGLDoc::OnCommandIncrease()
+{
+    m_QuadModel->SetRadius(m_QuadModel->GetRadius() + 0.1);
+}
+
+
+void COpenGLDoc::OnCommandDecrease()
+{
+    m_QuadModel->SetRadius(m_QuadModel->GetRadius() - 0.1);
 }

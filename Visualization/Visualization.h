@@ -1,5 +1,8 @@
 #pragma once
 
+#include <gl/glew.h>
+#include <gl/GL.h>
+
 class Visualization
 {
 public:
@@ -10,10 +13,5 @@ public:
 void
 display();
 
-#include <gl/glew.h>
-#include <gl/GL.h>
 
-extern GLuint program;
-
-
-void InitShader(const GLchar *vSource , const GLchar* fSource);
+GLuint InitShader(const GLchar *vSource , const GLchar* fSource);

@@ -25,7 +25,7 @@ Visualization::~Visualization(void)
 
 
 void
-display()
+    display()
 {
     /* rotate a triangle around */
     //glClear(GL_COLOR_BUFFER_BIT);
@@ -36,13 +36,13 @@ display()
     //glEnd();
 
     glBegin(GL_QUADS);
-	{
-		glColor3f(0.0f, 0.0f, 0.0f);   glVertex2i(0,  0);
-		glColor3f(1.0f, 0.0f, 0.0f);   glVertex2i(1,  0);
-		glColor3f(1.0f, 1.0f, 0.0f);   glVertex2i(1,  1);
-		glColor3f(0.0f, 1.0f, 0.0f);   glVertex2i(0,  1);
-	}
-	glEnd();
+    {
+        glColor3f(0.0f, 0.0f, 0.0f);   glVertex2i(0,  0);
+        glColor3f(1.0f, 0.0f, 0.0f);   glVertex2i(1,  0);
+        glColor3f(1.0f, 1.0f, 0.0f);   glVertex2i(1,  1);
+        glColor3f(0.0f, 1.0f, 0.0f);   glVertex2i(0,  1);
+    }
+    glEnd();
 
 }
 
@@ -56,7 +56,7 @@ void checkError(GLint status, const char *msg)
     }
 }
 
-void InitShader(const GLchar *vSource , const GLchar* fSource)
+GLuint InitShader(const GLchar *vSource , const GLchar* fSource)
 {
     GLint status = glGetError()==GL_NO_ERROR; 
 
@@ -64,19 +64,18 @@ void InitShader(const GLchar *vSource , const GLchar* fSource)
 
     GLuint vShader = glCreateShader(GL_VERTEX_SHADER);
     GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
-    /*GLuint */program = glCreateProgram();
+    GLuint program = glCreateProgram();
 
     glAttachShader(program, vShader);
-    glAttachShader(program, fShader);
-
     glShaderSource(vShader, 1, &vSource, NULL);
-    glShaderSource(fShader, 1, &fSource, NULL);
-
     glCompileShader(vShader);
+
+    glAttachShader(program, fShader);
+    glShaderSource(fShader, 1, &fSource, NULL);
     glCompileShader(fShader);
 
     /* error check */
-    int loglen;
+    int loglen = 0;
     char logbuffer[1000] = "";
 
     glGetShaderiv(vShader, GL_COMPILE_STATUS, &status);
@@ -91,13 +90,9 @@ void InitShader(const GLchar *vSource , const GLchar* fSource)
 
     glLinkProgram(program);
     glGetProgramiv(program, GL_LINK_STATUS, &status);
-
-
     glGetProgramInfoLog(program, sizeof(logbuffer), &loglen, logbuffer);
-    
 
     checkError(status, "Failed to link the shader program object.");
 
-    /* use program object */
-
+    return program;
 }
