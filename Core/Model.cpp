@@ -4,6 +4,7 @@
 
 Model::Model(void)
 {
+    _change_stamp = 0;
 }
 
 
@@ -23,6 +24,8 @@ void Model::_NotifyPropertyChanging( int property_id )
 
 void Model::_NotifyPropertyChanged( int property_id )
 {
+    _Touch();
+
     if (NULL != _callback)
     {
         callback_params params = {this, e_changed, property_id};
@@ -33,4 +36,14 @@ void Model::_NotifyPropertyChanged( int property_id )
 void Model::SetCallback( Callback & callback )
 {
     _callback = callback;
+}
+
+void Model::_Touch()
+{
+    _change_stamp++;
+}
+
+uint8_t Model::GetChangeStamp() const
+{
+    return _change_stamp;
 }

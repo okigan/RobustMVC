@@ -40,9 +40,14 @@ namespace CoreTest
 
             double radius = 10;
 
+            int stamp = quadModel.GetChangeStamp();
+
             quadModel.SetRadius(radius);
 
             Assert::AreEqual(radius, quadModel.GetRadius());
+
+            Assert::AreNotEqual(stamp, quadModel.GetChangeStamp());
+            Assert::AreEqual(quadModel.GetChangeStamp(), quadModel.GetChangeStamp());
 
 		}
 
@@ -66,5 +71,7 @@ namespace CoreTest
 
             Assert::AreEqual(true, x.called);
         }
+
+
 	};
 }
