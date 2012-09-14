@@ -24,7 +24,7 @@ Visualization::~Visualization(void)
 }
 
 
-void draw_quad()
+void DrawQuad()
 {
     glBegin(GL_QUADS);
     {
@@ -38,7 +38,7 @@ void draw_quad()
 }
 
 GLuint program = 0;
-void check_error(GLint status, const char *msg)
+void CheckError(GLint status, const char *msg)
 {
     if (!status)
     {
@@ -47,43 +47,46 @@ void check_error(GLint status, const char *msg)
     }
 }
 
-GLuint init_shader(const GLchar *vSource , const GLchar* fSource)
+GLint CreateAndAttachShader( GLuint program, GLenum shaderType, const GLchar * source, char * logbuffer, int * loglen)
+{
+    GLuint vShader = glCreateShader(shaderType);
+    glAttachShader(program, vShader);
+    glShaderSource(vShader, 1, &source, NULL);
+    glCompileShader(vShader);
+
+    GLint status = 0;
+
+    glGetShaderiv(vShader, GL_COMPILE_STATUS, &status);
+    glGetShaderInfoLog(vShader, sizeof(logbuffer), loglen, logbuffer);
+
+    return status;
+}
+
+
+GLuint CreateShaderProgram(GLuint * program, 
+    const GLchar *vSource , 
+    const GLchar* fSource, 
+    char * logbuffer, 
+    int loglen)
 {
     GLint status = glGetError()==GL_NO_ERROR; 
 
-    /* create program and shader objects */
+    GLuint p = glCreateProgram();
 
-    GLuint vShader = glCreateShader(GL_VERTEX_SHADER);
-    GLuint fShader = glCreateShader(GL_FRAGMENT_SHADER);
-    GLuint program = glCreateProgram();
+    status = CreateAndAttachShader(p, GL_VERTEX_SHADER, vSource, logbuffer, &loglen);
+    CheckError(status, "Failed to link the shader program object.");
 
-    glAttachShader(program, vShader);
-    glShaderSource(vShader, 1, &vSource, NULL);
-    glCompileShader(vShader);
+    status = CreateAndAttachShader(p, GL_FRAGMENT_SHADER, fSource, logbuffer, &loglen);
+    CheckError(status, "Failed to link the shader program object.");
 
-    glAttachShader(program, fShader);
-    glShaderSource(fShader, 1, &fSource, NULL);
-    glCompileShader(fShader);
+    glLinkProgram(p);
+    glGetProgramiv(p, GL_LINK_STATUS, &status);
+    glGetProgramInfoLog(p, sizeof(logbuffer), &loglen, logbuffer);
 
-    /* error check */
-    int loglen = 0;
-    char logbuffer[1000] = "";
+    CheckError(status, "Failed to link the shader program object.");
 
-    glGetShaderiv(vShader, GL_COMPILE_STATUS, &status);
-    glGetShaderInfoLog(vShader, sizeof(logbuffer), &loglen, logbuffer);
-    check_error(status, "Failed to compile the vertex shader.");
+    *program = p;
 
-    glGetShaderiv(fShader, GL_COMPILE_STATUS, &status);
-    glGetShaderInfoLog(fShader, sizeof(logbuffer), &loglen, logbuffer);
-    check_error(status, "Failed to compile the fragment shader.");
-
-    /* link */
-
-    glLinkProgram(program);
-    glGetProgramiv(program, GL_LINK_STATUS, &status);
-    glGetProgramInfoLog(program, sizeof(logbuffer), &loglen, logbuffer);
-
-    check_error(status, "Failed to link the shader program object.");
-
-    return program;
+    return status;
 }
+

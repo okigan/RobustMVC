@@ -10,8 +10,11 @@ public:
     ~Visualization(void);
 };
 
-void
-draw_quad();
+void DrawQuad();
 
 
-GLuint init_shader(const GLchar *vSource , const GLchar* fSource);
+GLuint CreateShaderProgram(GLuint * program, 
+    const GLchar *vSource , 
+    const GLchar* fSource, 
+    char * logbuffer, 
+    int loglen);

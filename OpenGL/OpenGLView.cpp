@@ -108,7 +108,7 @@ void COpenGLView::OnDraw(CDC* pDC)
     glTranslated(-1.5, 0, 0);
 
     glUseProgram(0);
-    draw_quad();
+    DrawQuad();
 
     glTranslated(1.5, 0, 0);
 

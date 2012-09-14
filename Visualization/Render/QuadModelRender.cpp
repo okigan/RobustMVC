@@ -59,7 +59,13 @@ void QuadModelRender::Initialize( HDC hDC, HGLRC hRC )
         "}                                   											"
     ;
 
-    _program = init_shader(vSource, fSource);
+
+    
+    char logbuffer[1000] = "";
+    int loglen = ARRAYSIZE(logbuffer);
+    
+
+    GLuint status = CreateShaderProgram(&_program, vSource, fSource, logbuffer, loglen);
 }
 
 void QuadModelRender::Render()
@@ -69,7 +75,7 @@ void QuadModelRender::Render()
         GLint location = glGetUniformLocation(_program, "radius");
         glUniform1f(location, (float)_quadModel->GetRadius());
 
-        draw_quad();
+        DrawQuad();
     }
     glUseProgram(0);
 }
