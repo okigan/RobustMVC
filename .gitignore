@@ -1,8 +1,13 @@
-bin
-objs
-TestResults
+bin/
+objs/
+TestResults/
 *.sdf
 *.suo
 **.vcxproj.filters
 **.vcxproj.user
 **.aps
+**/Release/
+**/Debug/
+**/x64/
+ipch/
+*.opensdf
