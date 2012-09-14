@@ -45,7 +45,7 @@ void QuadModelRender::Initialize( HDC hDC, HGLRC hRC )
     ;
 
     GLchar* fSource = 
-        "uniform float radius = 1.0;                                                    "
+        "uniform float radius;                                                          "
         "varying float x;                                                               "
         "varying float y;                                                               "
         "void main()                         											"
