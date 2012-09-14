@@ -31,7 +31,7 @@ namespace CoreTest
     };
 
 	[TestClass]
-	public ref class QuadModelUnitTest
+	public ref class QuadModelTest
 	{
 	public: 
 		[TestMethod]
