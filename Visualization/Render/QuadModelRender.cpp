@@ -31,7 +31,8 @@ void QuadModelRender::SetQuadModel( QuadModel const * val )
     _quadModel = val;
 }
 
-void QuadModelRender::Initialize( HDC hDC, HGLRC hRC )
+
+bool QuadModelRender::Initialize( HDC hDC, HGLRC hRC, char * logbuffer, int * loglen )
 {
     GLchar* vSource = 
         "varying float x;                                                               "
@@ -57,15 +58,11 @@ void QuadModelRender::Initialize( HDC hDC, HGLRC hRC )
         "        gl_FragColor = vec4(0, 0, 0, 1);										"
         "	}																			"
         "}                                   											"
-    ;
-
-
-    
-    char logbuffer[1000] = "";
-    int loglen = ARRAYSIZE(logbuffer);
-    
+    ;    
 
     GLuint status = CreateShaderProgram(&_program, vSource, fSource, logbuffer, loglen);
+
+    return GL_NO_ERROR ==  status;
 }
 
 void QuadModelRender::Render()

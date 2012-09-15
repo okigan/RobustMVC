@@ -63,25 +63,21 @@ GLint CreateAndAttachShader( GLuint program, GLenum shaderType, const GLchar * s
 }
 
 
-GLuint CreateShaderProgram(GLuint * program, 
-    const GLchar *vSource , 
-    const GLchar* fSource, 
-    char * logbuffer, 
-    int loglen)
+GLuint CreateShaderProgram( GLuint * program, const GLchar *vSource , const GLchar* fSource, char * logbuffer, int * loglen )
 {
     GLint status = glGetError()==GL_NO_ERROR; 
 
     GLuint p = glCreateProgram();
 
-    status = CreateAndAttachShader(p, GL_VERTEX_SHADER, vSource, logbuffer, &loglen);
+    status = CreateAndAttachShader(p, GL_VERTEX_SHADER, vSource, logbuffer, loglen);
     CheckError(status, "Failed to link the shader program object.");
 
-    status = CreateAndAttachShader(p, GL_FRAGMENT_SHADER, fSource, logbuffer, &loglen);
+    status = CreateAndAttachShader(p, GL_FRAGMENT_SHADER, fSource, logbuffer, loglen);
     CheckError(status, "Failed to link the shader program object.");
 
     glLinkProgram(p);
     glGetProgramiv(p, GL_LINK_STATUS, &status);
-    glGetProgramInfoLog(p, sizeof(logbuffer), &loglen, logbuffer);
+    glGetProgramInfoLog(p, sizeof(logbuffer), loglen, logbuffer);
 
     CheckError(status, "Failed to link the shader program object.");
 

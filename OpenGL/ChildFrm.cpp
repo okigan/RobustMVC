@@ -42,8 +42,34 @@ CChildFrame::~CChildFrame()
 BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
     cs.style |= WS_CLIPCHILDREN;
-    cs.style |= WS_MAXIMIZE;
-    cs.style |= WS_VISIBLE;
+
+    int view_count = 0;
+    {
+        POSITION pos_dt = theApp.GetFirstDocTemplatePosition();
+
+        if( NULL != pos_dt) {
+            for(CDocTemplate* dt = theApp.GetNextDocTemplate(pos_dt); dt != NULL; dt = pos_dt ? theApp.GetNextDocTemplate(pos_dt) : nullptr) {
+                POSITION pos_doc = dt->GetFirstDocPosition();
+
+                if( NULL != pos_doc) {
+                    for(CDocument* doc = dt->GetNextDoc(pos_doc); doc != NULL; doc = pos_doc ? dt->GetNextDoc(pos_doc) : nullptr){
+                        POSITION pos_view = doc->GetFirstViewPosition();
+
+                        if( NULL != pos_view) {
+                            for(CView* view = doc->GetNextView(pos_view); view != NULL; view = pos_view ? doc->GetNextView(pos_view) : nullptr){
+                                view_count++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if( 0 == view_count ) {
+        cs.style |= WS_MAXIMIZE;
+        cs.style |= WS_VISIBLE;
+    }
 	
 	if( !CMDIChildWndEx::PreCreateWindow(cs) )
 		return FALSE;

@@ -35,25 +35,18 @@ END_MESSAGE_MAP()
 
 COpenGLDoc::COpenGLDoc()
 {
-	m_PixelFormat = -1;
-    m_RenderingContext = NULL;
-
     m_QuadModel.reset(new QuadModel());
     m_QuadModelController.reset(new QuadModelController());
 
     m_QuadModelController->SetModel(m_QuadModel.get());
 
-    Model::Callback callback = std::bind(&COpenGLDoc::OnPropertyChangeCallback, this, std::placeholders::_1);
+    Model::Callback callback = std::bind(&COpenGLDoc::_OnPropertyChangeCallback, this, std::placeholders::_1);
 
     m_QuadModel->SetCallback(callback);
 }
 
 COpenGLDoc::~COpenGLDoc()
 {
-    wglDeleteContext(m_RenderingContext);
-
-    m_RenderingContext = NULL;
-
 
 }
 
@@ -156,28 +149,7 @@ void COpenGLDoc::Dump(CDumpContext& dc) const
 
 // COpenGLDoc commands
 
-
-int COpenGLDoc::GetPixelFormat(void)
-{
-    return m_PixelFormat;
-}
-
-void COpenGLDoc::SetPixelFormat(int pixelFormat)
-{
-    m_PixelFormat = pixelFormat;
-}
-
-HGLRC COpenGLDoc::GetRenderingContext(void)
-{
-    return m_RenderingContext;
-}
-
-void COpenGLDoc::SetRenderingContext(HGLRC renderingContext)
-{
-    m_RenderingContext = renderingContext;
-}
-
-void COpenGLDoc::OnPropertyChangeCallback( const Model::callback_params & params)
+void COpenGLDoc::_OnPropertyChangeCallback( const Model::callback_params & params)
 {
     if( params.model == m_QuadModel.get() )
     {
@@ -211,4 +183,9 @@ BOOL COpenGLDoc::OnCommand(UINT id)
     }
 
     return TRUE;
+}
+
+SharedPropertyBag * COpenGLDoc::GetSharedRuntimePropertyBag()
+{
+    return &m_SharedRuntimePropertyBag;
 }

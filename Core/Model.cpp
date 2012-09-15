@@ -43,7 +43,7 @@ void Model::_Touch( )
     _change_stamp++;
 }
 
-uint8_t Model::GetChangeStamp( ) const
+unsigned char Model::GetChangeStamp() const
 {
     return _change_stamp;
 }

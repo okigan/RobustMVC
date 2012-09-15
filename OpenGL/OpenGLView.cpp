@@ -91,7 +91,7 @@ void COpenGLView::OnDraw(CDC* pDC)
     int height = rcClient.Height();
 
     HDC hDC = pDC->GetSafeHdc();
-    HGLRC hRC = pDoc->GetRenderingContext();
+    HGLRC hRC = boost::any_cast<HGLRC>(*m_RenderingContext);
 
     BOOL bRet = wglMakeCurrent(hDC, hRC);
 
@@ -239,21 +239,43 @@ int ChoosePixelFormat(HDC hDC, bool isPrinting)
 
 
 // COpenGLView message handlers
+void DeleterBoostAnyHGLRC( boost::any* ptr)
+{
+    HGLRC hRC = boost::any_cast<HGLRC>(*ptr);
 
+    BOOL bRet = wglDeleteContext(hRC);
+
+    delete ptr;
+}
 
 int COpenGLView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
     if (CView::OnCreate(lpCreateStruct) == -1)
         return -1;
-
-    int pixelFormat = GetDocument()->GetPixelFormat();
+    
+    auto pb = GetDocument()->GetSharedRuntimePropertyBag();
+    auto value = pb->Get("pixel_format");
+    int pixelFormat = nullptr != value? boost::any_cast<int>(*value) : -1;
 
     CDC* pDC = GetDC();
     {
         HDC hDC = pDC->GetSafeHdc();
         bool isPrinting = pDC->IsPrinting() != FALSE;
 
-        pixelFormat = InitializeDeviceContext(pixelFormat, hDC, isPrinting);
+        HGLRC hRC = NULL;
+
+        BOOL bRet = SetPixelFormatOrCreateRenderingContext(hDC, isPrinting, &pixelFormat, &hRC);
+
+        if( nullptr == value ) {
+            m_PixelFormat.reset(new boost::any(pixelFormat));
+            m_RenderingContext.reset(new boost::any(hRC), DeleterBoostAnyHGLRC);
+
+            pb->Put("pixel_format", m_PixelFormat);
+            pb->Put("rendering_context", m_RenderingContext);
+        } else {
+            m_PixelFormat       = pb->Get("pixel_format");
+            m_RenderingContext  = pb->Get("rendering_context");
+        }
     }
     ReleaseDC(pDC);
 
@@ -278,64 +300,66 @@ void COpenGLView::OnSize(UINT nType, int cx, int cy)
     CView::OnSize(nType, cx, cy);
 }
 
-int COpenGLView::InitializeDeviceContext( int pixelFormat, HDC hDC, bool isPrinting )
+BOOL COpenGLView::SetPixelFormatOrCreateRenderingContext(HDC hDC, bool isPrinting, int * pPixelFormat, HGLRC * phRC)
 {
     BOOL bRet = FALSE;
-
-    if( pixelFormat < 0 ) {
-        pixelFormat = ChoosePixelFormat(hDC, isPrinting);
-
-        GetDocument()->SetPixelFormat(pixelFormat);
-    }
 
     PIXELFORMATDESCRIPTOR pfd = {0};
     pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
     pfd.nVersion = 1;
 
-    bRet = ::SetPixelFormat(hDC, pixelFormat, &pfd);
+    if( *pPixelFormat < 0 ) {
+        *pPixelFormat = ChoosePixelFormat(hDC, isPrinting);
 
-    HGLRC hRC = GetDocument()->GetRenderingContext();
+        bRet = SetPixelFormat( hDC, *pPixelFormat, &pfd );
+        if( TRUE != bRet )
+            return bRet;
 
-    if( NULL == hRC) {
-        hRC = wglCreateContext(hDC);
+        *phRC = wglCreateContext( hDC );
 
-        GetDocument()->SetRenderingContext(hRC);
+        bRet = wglMakeCurrent( hDC, *phRC );
+        if( TRUE != bRet )
+            return bRet;
+
+        GLenum err = glewInit( );
+        if( GLEW_OK != err )
+            return FALSE;
+
+        if( !GLEW_VERSION_2_1 )  // check that the machine supports the 2.1 API.
+            return FALSE;
+
+        bRet = wglMakeCurrent( NULL, NULL );
+
+    } else {
+        bRet = ::SetPixelFormat( hDC, *pPixelFormat, &pfd );
+        if( TRUE != bRet )
+            return bRet;
     }
 
-    bRet = wglMakeCurrent(hDC, hRC);
-
-    GLenum err = glewInit();
-    if (GLEW_OK != err)
-    {
-        /* Problem: glewInit failed, something is seriously wrong. */
-        fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-    }
-
-    if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
-        exit(1);
-
-    bRet = wglMakeCurrent(NULL, NULL);
-    return pixelFormat;
+    return bRet;
 }
 
 
-void COpenGLView::OnInitialUpdate()
+void COpenGLView::OnInitialUpdate( )
 {
-    CView::OnInitialUpdate();
+    CView::OnInitialUpdate( );
 
-    m_QuadModelRender.reset(new QuadModelRender());
+    m_QuadModelRender.reset( new QuadModelRender() );
 
-    m_QuadModelRender->SetQuadModel(GetDocument()->GetQuadModel());
+    m_QuadModelRender->SetQuadModel( GetDocument()->GetQuadModel() );
 
-    CDC* pDC = GetDC();
-    HDC hDC = pDC->GetSafeHdc();
-    HGLRC hRC = GetDocument()->GetRenderingContext();
+    CDC* pDC = GetDC( );
+    HDC hDC = pDC->GetSafeHdc( );
+    HGLRC hRC = boost::any_cast<HGLRC>( *m_RenderingContext );
 
-    BOOL bRet = wglMakeCurrent(hDC, hRC);
+    BOOL bRet = wglMakeCurrent( hDC, hRC );
     {
-        m_QuadModelRender->Initialize(hDC, hRC);
-    }
-    bRet = wglMakeCurrent(NULL, NULL);
+        char logbuffer[1000] = "";
+        int loglen = ARRAYSIZE(logbuffer);
 
-    ReleaseDC(pDC);
+        m_QuadModelRender->Initialize( hDC, hRC, logbuffer, &loglen );
+    }
+    bRet = wglMakeCurrent( NULL, NULL );
+
+    ReleaseDC( pDC );
 }

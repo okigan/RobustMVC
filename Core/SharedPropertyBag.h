@@ -17,6 +17,10 @@ public:
 
     bool Get( const std::string & key, std::shared_ptr<boost::any> & value );
 
+    std::shared_ptr<boost::any> Get( const std::string & key );
+
+    bool Get( const std::string & key, std::shared_ptr<const boost::any> & value ) const;
+
     size_t Size();
 
 protected:

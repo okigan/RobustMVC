@@ -13,8 +13,4 @@ public:
 void DrawQuad();
 
 
-GLuint CreateShaderProgram(GLuint * program, 
-    const GLchar *vSource , 
-    const GLchar* fSource, 
-    char * logbuffer, 
-    int loglen);
+GLuint CreateShaderProgram(GLuint * program, const GLchar *vSource , const GLchar* fSource, char * logbuffer, int * loglen);

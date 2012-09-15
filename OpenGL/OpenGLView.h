@@ -56,13 +56,17 @@ protected:
 
 protected:
 
-    int InitializeDeviceContext( int pixelFormat, HDC hDC, bool isPrinting );
+    BOOL SetPixelFormatOrCreateRenderingContext(HDC hDC, bool isPrinting, int * pPixelFormat, HGLRC * phRC);
 
 protected:
-    std::unique_ptr<QuadModelRender> m_QuadModelRender;
+    std::unique_ptr<QuadModelRender>    m_QuadModelRender;
+
+    std::shared_ptr<boost::any>         m_PixelFormat;
+    std::shared_ptr<boost::any>         m_RenderingContext;
 
 public:
     virtual void OnInitialUpdate();
+
 };
 
 #ifndef _DEBUG  // debug version in OpenGLView.cpp

@@ -8,6 +8,7 @@
 #include <memory>
 
 #include <Core/Model.h>
+#include <Core/SharedPropertyBag.h>
 
 class QuadModel;
 class QuadModelController;
@@ -55,26 +56,23 @@ protected:
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
 public:
-    int GetPixelFormat(void);
-    void SetPixelFormat(int pixelFormat);
-
-    HGLRC GetRenderingContext(void);
-    void SetRenderingContext(HGLRC renderingContext);
 
 public:
     const QuadModel * GetQuadModel() const;
 
-private:
-    void OnPropertyChangeCallback(const Model::callback_params &);
+    SharedPropertyBag * GetSharedRuntimePropertyBag() ;
+
+public:
+    afx_msg BOOL OnCommand(UINT id);
 
 private:
-    int m_PixelFormat;
-    HGLRC m_RenderingContext;
+    void _OnPropertyChangeCallback(const Model::callback_params &);
 
 private:
     std::unique_ptr<QuadModel> m_QuadModel;
     std::unique_ptr<QuadModelController> m_QuadModelController;
 
-public:
-    afx_msg BOOL OnCommand(UINT id);
+    SharedPropertyBag m_SharedRuntimePropertyBag;
+
+
 };
