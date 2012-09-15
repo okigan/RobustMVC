@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		OpenGL.vsmdi = OpenGL.vsmdi
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WebServer", "WebServer\WebServer.vcxproj", "{47103808-0D28-4F67-A8D5-8CAA17369984}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OpenGL.vsmdi
@@ -71,6 +73,12 @@ Global
 		{3835D34C-0569-4B49-B02F-E0FE5DF54A0C}.Release|Win32.ActiveCfg = Release|Win32
 		{3835D34C-0569-4B49-B02F-E0FE5DF54A0C}.Release|Win32.Build.0 = Release|Win32
 		{3835D34C-0569-4B49-B02F-E0FE5DF54A0C}.Release|x64.ActiveCfg = Release|Win32
+		{47103808-0D28-4F67-A8D5-8CAA17369984}.Debug|Win32.ActiveCfg = Debug|Win32
+		{47103808-0D28-4F67-A8D5-8CAA17369984}.Debug|Win32.Build.0 = Debug|Win32
+		{47103808-0D28-4F67-A8D5-8CAA17369984}.Debug|x64.ActiveCfg = Debug|Win32
+		{47103808-0D28-4F67-A8D5-8CAA17369984}.Release|Win32.ActiveCfg = Release|Win32
+		{47103808-0D28-4F67-A8D5-8CAA17369984}.Release|Win32.Build.0 = Release|Win32
+		{47103808-0D28-4F67-A8D5-8CAA17369984}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
