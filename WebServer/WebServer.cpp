@@ -25,6 +25,7 @@
 #include <Core/Model/QuadModel.h>
 #include <Core/Controller/QuadModelController.h>
 #include <Visualization/Visualization.h>
+#include <Visualization/Render/QuadModelRender.h>
 
 QuadModel model;
 QuadModelController controler;
@@ -83,7 +84,7 @@ int ChoosePixelFormat(HDC hDC, bool isPrinting)
 
 bool f(struct mg_connection *conn)
 {
-    HWND hWND = CreateWindow(_T("BUTTON"), NULL, WS_OVERLAPPEDWINDOW, 0, 0, 10, 10, NULL, NULL, NULL, NULL);
+    HWND hWND = CreateWindow(_T("BUTTON"), NULL, WS_OVERLAPPEDWINDOW /*| WS_VISIBLE*/, 0, 0, 512, 512, NULL, NULL, NULL, NULL);
     HDC hDC = GetDC(hWND);
     int pixelForamt = ChoosePixelFormat(hDC, false);
     PIXELFORMATDESCRIPTOR pfd = {0};
@@ -104,6 +105,7 @@ bool f(struct mg_connection *conn)
 
     //if( !GLEW_VERSION_3_1 )  // check that the machine supports the 2.1 API.
     //    return false;
+
 
 
     int width = 512;
@@ -150,12 +152,15 @@ bool f(struct mg_connection *conn)
 
     glViewport(0, 0, width, height);
     glClearColor(1, 1, 0, 1);
-    glClear(GL_FRONT_AND_BACK);
 
-    glPushAttrib(GL_COLOR_BUFFER_BIT | GL_PIXEL_MODE_BIT); // for GL_DRAW_BUFFER and GL_READ_BUFFER
-    glDrawBuffer(GL_BACK);
-    
-    glReadBuffer(GL_BACK);
+    //glPushAttrib(GL_COLOR_BUFFER_BIT | GL_PIXEL_MODE_BIT); // for GL_DRAW_BUFFER and GL_READ_BUFFER
+    //glDrawBuffer(GL_BACK);
+    //glReadBuffer(GL_BACK);
+    assert(0 == glGetError());
+
+    //glClear(GL_FRONT_AND_BACK);
+    assert(0 == glGetError());
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     double aspect = width / (double)height;
@@ -170,9 +175,23 @@ bool f(struct mg_connection *conn)
     DrawQuad();
 
     glTranslated(1.5, 0, 0);
+    //glPopAttrib();
 
-    glPopAttrib();
+    QuadModelRender qr;
+    qr.SetQuadModel(&model);
+
+    char logbuffer[1024] = "";
+    int loglen = ARRAYSIZE(logbuffer);
+    qr.Initialize(logbuffer, &loglen);
+    assert(0 == glGetError());
+
+    qr.Render();
+    assert(0 == glGetError());
+
     glFinish();
+
+    GLenum error = glGetError();
+    
 
     int bits = 24;
 

@@ -32,32 +32,38 @@ void QuadModelRender::SetQuadModel( QuadModel const * val )
 }
 
 
-bool QuadModelRender::Initialize( HGLRC hRC, char * logbuffer, int * loglen )
+bool QuadModelRender::Initialize( char * logbuffer, int * loglen )
 {
+    const GLubyte * vendor = glGetString(GL_VENDOR);
+    const GLubyte * render = glGetString(GL_RENDERER);
+    const GLubyte * version = glGetString(GL_VERSION);
+    const GLubyte * shversion = glGetString(GL_SHADING_LANGUAGE_VERSION);
+    const GLubyte * extensions = glGetString(GL_EXTENSIONS);
+
     GLchar* vSource = 
-        "varying float x;                                                               "
-        "varying float y;                                                               "
-        "void main() {                                                                  "
-        "   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                     "
-        "   gl_FrontColor = gl_Vertex;													"
-        "   x = gl_Vertex.x;															"
-        "   y = gl_Vertex.y;															"
-        "}                                                                              "
+        "varying float x;                                                               \r"
+        "varying float y;                                                               \r"
+        "void main() {                                                                  \r"
+        "   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                     \r"
+        "   gl_FrontColor = gl_Vertex;                                                  \r"
+        "   x = gl_Vertex.x;                                                            \r"
+        "   y = gl_Vertex.y;                                                            \r"
+        "}                                                                              \r"
     ;
 
     GLchar* fSource = 
-        "uniform float radius;                                                          "
-        "varying float x;                                                               "
-        "varying float y;                                                               "
-        "void main()                         											"
-        "{                                   											"
-        "    float r = sqrt(x*x + y*y);                                                 "
-        "    if( r <= radius ) {                                                     	"
-        "        gl_FragColor = gl_Color;        										"
-        "    } else  {																	"
-        "        gl_FragColor = vec4(0, 0, 0, 1);										"
-        "	}																			"
-        "}                                   											"
+        "uniform float radius;                                                          \r"
+        "varying float x;                                                               \r"
+        "varying float y;                                                               \r"
+        "void main()                                                                    \r"
+        "{                                                                              \r"
+        "    float r = sqrt(x*x + y*y);                                                 \r"
+        "    if( r <= radius ) {                                                        \r"
+        "        gl_FragColor = gl_Color;                                               \r"
+        "    } else  {                                                                  \r"
+        "        gl_FragColor = vec4(0.01, 0.01, 0.01, 1);                             \r"
+        "   }                                                                           \r"
+        "}                                                                              \r"
     ;    
 
     GLuint status = CreateShaderProgram(&_program, vSource, fSource, logbuffer, loglen);
@@ -68,6 +74,7 @@ bool QuadModelRender::Initialize( HGLRC hRC, char * logbuffer, int * loglen )
 void QuadModelRender::Render()
 {
     glUseProgram(_program);
+    //glUseProgram(0);
     {
         GLint location = glGetUniformLocation(_program, "radius");
         glUniform1f(location, (float)_quadModel->GetRadius());

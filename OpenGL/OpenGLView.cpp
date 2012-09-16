@@ -357,7 +357,7 @@ void COpenGLView::OnInitialUpdate( )
         char logbuffer[1000] = "";
         int loglen = ARRAYSIZE(logbuffer);
 
-        m_QuadModelRender->Initialize( hRC, logbuffer, &loglen );
+        m_QuadModelRender->Initialize( logbuffer, &loglen );
     }
     bRet = wglMakeCurrent( NULL, NULL );
 
