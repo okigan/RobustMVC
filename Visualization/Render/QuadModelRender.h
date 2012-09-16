@@ -14,7 +14,7 @@ public:
 
     QuadModel const * GetQuadModel() const;
     void SetQuadModel(QuadModel const * val);
-    bool Initialize( HDC hDC, HGLRC hRC, char * logbuffer, int * loglen );
+    bool Initialize( HGLRC hRC, char * logbuffer, int * loglen );
     void Render();
 
 protected:

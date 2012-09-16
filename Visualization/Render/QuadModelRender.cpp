@@ -32,7 +32,7 @@ void QuadModelRender::SetQuadModel( QuadModel const * val )
 }
 
 
-bool QuadModelRender::Initialize( HDC hDC, HGLRC hRC, char * logbuffer, int * loglen )
+bool QuadModelRender::Initialize( HGLRC hRC, char * logbuffer, int * loglen )
 {
     GLchar* vSource = 
         "varying float x;                                                               "
