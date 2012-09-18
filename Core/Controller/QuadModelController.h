@@ -17,8 +17,8 @@ public:
         e_decrease_radius,
     };
 
-    virtual Model* GetModel() const;
-    virtual void SetModel(QuadModel* val);
+    virtual Model* GetModel() const override;
+    virtual void SetModel(QuadModel* val) ;
 
 
     void IncreaseRadius();
