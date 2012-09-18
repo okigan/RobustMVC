@@ -18,11 +18,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core.Test", "Core.Test\Core
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F890F21-A98E-4426-88A2-9569FA649D24}"
 	ProjectSection(SolutionItems) = preProject
+		Doxyfile = Doxyfile
 		Local.testsettings = Local.testsettings
 		OpenGL.vsmdi = OpenGL.vsmdi
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WebServer", "WebServer\WebServer.vcxproj", "{47103808-0D28-4F67-A8D5-8CAA17369984}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Documentation", "Documentation\Documentation.vcxproj", "{89B0D26C-1941-4852-AE69-1BAF05A54245}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -79,6 +83,12 @@ Global
 		{47103808-0D28-4F67-A8D5-8CAA17369984}.Release|Win32.ActiveCfg = Release|Win32
 		{47103808-0D28-4F67-A8D5-8CAA17369984}.Release|Win32.Build.0 = Release|Win32
 		{47103808-0D28-4F67-A8D5-8CAA17369984}.Release|x64.ActiveCfg = Release|Win32
+		{89B0D26C-1941-4852-AE69-1BAF05A54245}.Debug|Win32.ActiveCfg = Debug|Win32
+		{89B0D26C-1941-4852-AE69-1BAF05A54245}.Debug|Win32.Build.0 = Debug|Win32
+		{89B0D26C-1941-4852-AE69-1BAF05A54245}.Debug|x64.ActiveCfg = Debug|Win32
+		{89B0D26C-1941-4852-AE69-1BAF05A54245}.Release|Win32.ActiveCfg = Release|Win32
+		{89B0D26C-1941-4852-AE69-1BAF05A54245}.Release|Win32.Build.0 = Release|Win32
+		{89B0D26C-1941-4852-AE69-1BAF05A54245}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
