@@ -11,7 +11,7 @@
 
 QuadModelRender::QuadModelRender(void)
 {
-    _quadModel = nullptr;
+    _model = nullptr;
 
     _program = 0;
 }
@@ -23,12 +23,12 @@ QuadModelRender::~QuadModelRender(void)
 
 QuadModel const * QuadModelRender::GetQuadModel() const
 {
-    return _quadModel;
+    return _model;
 }
 
 void QuadModelRender::SetQuadModel( QuadModel const * val )
 {
-    _quadModel = val;
+    _model = val;
 }
 
 
@@ -61,7 +61,7 @@ bool QuadModelRender::Initialize( char * logbuffer, int * loglen )
         "    if( r <= radius ) {                                                        \r"
         "        gl_FragColor = gl_Color;                                               \r"
         "    } else  {                                                                  \r"
-        "        gl_FragColor = vec4(0.01, 0.01, 0.01, 1);                             \r"
+        "        gl_FragColor = vec4(0.01, 0.01, 0.01, 1);                              \r"
         "   }                                                                           \r"
         "}                                                                              \r"
     ;    
@@ -77,7 +77,7 @@ void QuadModelRender::Render()
     //glUseProgram(0);
     {
         GLint location = glGetUniformLocation(_program, "radius");
-        glUniform1f(location, (float)_quadModel->GetRadius());
+        glUniform1f(location, (float)_model->GetRadius());
 
         DrawQuad();
     }

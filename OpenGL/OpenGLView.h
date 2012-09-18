@@ -4,12 +4,16 @@
 
 #pragma once
 
+#include <afxwin.h>
+
 #include <gl/glew.h>
 #include <gl/GL.h>
 
 #include <memory>
 
 class QuadModelRender;
+class QuadModelController;
+
 
 class COpenGLView : public CView
 {
@@ -41,6 +45,9 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
+public:
+    afx_msg BOOL OnCommand(UINT id);
+
 protected:
 
 // Generated message map functions
@@ -52,6 +59,7 @@ protected:
     afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
     afx_msg void OnDestroy();
     afx_msg void OnSize(UINT nType, int cx, int cy);
+    afx_msg void OnUpdateCommandUI(CCmdUI* pUI);
 	DECLARE_MESSAGE_MAP()
 
 protected:
@@ -59,18 +67,18 @@ protected:
     BOOL SetPixelFormatOrCreateRenderingContext(HDC hDC, bool isPrinting, int * pPixelFormat, HGLRC * phRC);
 
 protected:
-    std::unique_ptr<QuadModelRender>    m_QuadModelRender;
+    std::unique_ptr<QuadModelController> m_controller;
+
+    std::unique_ptr<QuadModelRender>    m_render;
 
     std::shared_ptr<boost::any>         m_PixelFormat;
     std::shared_ptr<boost::any>         m_RenderingContext;
+
+    COpenGLDoc*&    m_pDocument;
 
 public:
     virtual void OnInitialUpdate();
 
 };
 
-#ifndef _DEBUG  // debug version in OpenGLView.cpp
-inline COpenGLDoc* COpenGLView::GetDocument() const
-   { return reinterpret_cast<COpenGLDoc*>(m_pDocument); }
-#endif
 

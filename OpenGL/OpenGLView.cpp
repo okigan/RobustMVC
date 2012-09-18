@@ -13,6 +13,7 @@
 #include "OpenGLView.h"
 
 #include <Core/Model/QuadModel.h>
+#include <Core/Controller/QuadModelController.h>
 
 #include <gl/glew.h>
 #pragma comment(lib, "glew32.lib")
@@ -50,11 +51,16 @@ BEGIN_MESSAGE_MAP(COpenGLView, CView)
     ON_WM_ERASEBKGND()
     ON_WM_DESTROY()
     ON_WM_SIZE()
+    ON_COMMAND_EX(ID_COMMAND_INCREASE, &COpenGLView::OnCommand)
+    ON_COMMAND_EX(ID_COMMAND_DECREASE, &COpenGLView::OnCommand)
+    ON_UPDATE_COMMAND_UI(ID_COMMAND_INCREASE, &COpenGLView::OnUpdateCommandUI)
+    ON_UPDATE_COMMAND_UI(ID_COMMAND_DECREASE, &COpenGLView::OnUpdateCommandUI)
+
 END_MESSAGE_MAP()
 
 // COpenGLView construction/destruction
 
-COpenGLView::COpenGLView()
+COpenGLView::COpenGLView() : m_pDocument (reinterpret_cast<COpenGLDoc*&>(CView::m_pDocument))
 {
 	EnableActiveAccessibility();
 }
@@ -118,8 +124,8 @@ void COpenGLView::OnDraw(CDC* pDC)
     //glUniform1f(location, (float)GetDocument()->GetQuadModel()->GetRadius());
     //display();
 
-    if( nullptr != m_QuadModelRender ) {
-        m_QuadModelRender->Render();
+    if( nullptr != m_render ) {
+        m_render->Render();
     }
 
     glFinish();
@@ -182,13 +188,14 @@ void COpenGLView::Dump(CDumpContext& dc) const
 {
 	CView::Dump(dc);
 }
+#endif //_DEBUG
 
 COpenGLDoc* COpenGLView::GetDocument() const // non-debug version is inline
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(COpenGLDoc)));
-	return (COpenGLDoc*)m_pDocument;
+	return m_pDocument;
 }
-#endif //_DEBUG
+
 
 
 int ChoosePixelFormat(HDC hDC, bool isPrinting) 
@@ -344,9 +351,13 @@ void COpenGLView::OnInitialUpdate( )
 {
     CView::OnInitialUpdate( );
 
-    m_QuadModelRender.reset( new QuadModelRender() );
+    m_controller.reset( new QuadModelController() );
 
-    m_QuadModelRender->SetQuadModel( GetDocument()->GetQuadModel() );
+    GetDocument()->AddModelController(m_controller.get());
+
+    m_render.reset( new QuadModelRender() );
+
+    m_render->SetQuadModel( GetDocument()->GetQuadModel() );
 
     CDC* pDC = GetDC( );
     HDC hDC = pDC->GetSafeHdc( );
@@ -357,9 +368,32 @@ void COpenGLView::OnInitialUpdate( )
         char logbuffer[1000] = "";
         int loglen = ARRAYSIZE(logbuffer);
 
-        m_QuadModelRender->Initialize( logbuffer, &loglen );
+        m_render->Initialize( logbuffer, &loglen );
     }
     bRet = wglMakeCurrent( NULL, NULL );
 
     ReleaseDC( pDC );
+}
+
+BOOL COpenGLView::OnCommand(UINT id)
+{
+    switch( id )
+    {
+    case ID_COMMAND_INCREASE: m_controller->IncreaseRadius(); break;
+    case ID_COMMAND_DECREASE: m_controller->DecreaseRadius(); break;
+    }
+
+    return TRUE;
+}
+
+void COpenGLView::OnUpdateCommandUI( CCmdUI* pUI )
+{
+    if( !m_controller.get() )
+        return ; 
+
+    switch( pUI->m_nID)
+    {
+    case ID_COMMAND_INCREASE: pUI->Enable(m_controller->IsActionEnabled(QuadModelController::e_increase_radius)); break;
+    case ID_COMMAND_DECREASE: pUI->Enable(m_controller->IsActionEnabled(QuadModelController::e_decrease_radius)); break;
+    }
 }

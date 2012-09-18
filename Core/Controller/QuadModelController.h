@@ -2,16 +2,30 @@
 
 class QuadModel;
 
-class QuadModelController
+#include "../Controller.h"
+
+class QuadModelController : public Controller 
 {
 public:
     QuadModelController(void);
     ~QuadModelController(void);
 
-    QuadModel* GetModel() const;
-    void SetModel(QuadModel* val);
+public:
+    enum e_action_ids
+    {
+        e_increase_radius,
+        e_decrease_radius,
+    };
+
+    virtual Model* GetModel() const;
+    virtual void SetModel(QuadModel* val);
+
+
     void IncreaseRadius();
     void DecreaseRadius();
+
+    virtual bool IsActionEnabled( int action );
+
 protected:
     QuadModel* _model;
 };

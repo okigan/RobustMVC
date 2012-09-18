@@ -26,8 +26,6 @@
 IMPLEMENT_DYNCREATE(COpenGLDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(COpenGLDoc, CDocument)
-    ON_COMMAND_EX(ID_COMMAND_INCREASE, &COpenGLDoc::OnCommand)
-    ON_COMMAND_EX(ID_COMMAND_DECREASE, &COpenGLDoc::OnCommand)
 END_MESSAGE_MAP()
 
 
@@ -35,14 +33,11 @@ END_MESSAGE_MAP()
 
 COpenGLDoc::COpenGLDoc()
 {
-    m_QuadModel.reset(new QuadModel());
-    m_QuadModelController.reset(new QuadModelController());
-
-    m_QuadModelController->SetModel(m_QuadModel.get());
+    m_model.reset(new QuadModel());
 
     Model::Callback callback = std::bind(&COpenGLDoc::_OnPropertyChangeCallback, this, std::placeholders::_1);
 
-    m_QuadModel->SetCallback(callback);
+    m_model->SetCallback(callback);
 }
 
 COpenGLDoc::~COpenGLDoc()
@@ -151,7 +146,7 @@ void COpenGLDoc::Dump(CDumpContext& dc) const
 
 void COpenGLDoc::_OnPropertyChangeCallback( const Model::callback_params & params)
 {
-    if( params.model == m_QuadModel.get() )
+    if( params.model == m_model.get() )
     {
         if( Model::e_changing == params.stage )
         {
@@ -170,22 +165,16 @@ void COpenGLDoc::_OnPropertyChangeCallback( const Model::callback_params & param
 
 const QuadModel * COpenGLDoc::GetQuadModel() const
 {
-    return m_QuadModel.get();
+    return m_model.get();
 }
 
-
-BOOL COpenGLDoc::OnCommand(UINT id)
-{
-    switch( id )
-    {
-    case ID_COMMAND_INCREASE: m_QuadModelController->IncreaseRadius(); break;
-    case ID_COMMAND_DECREASE: m_QuadModelController->DecreaseRadius(); break;
-    }
-
-    return TRUE;
-}
 
 SharedPropertyBag * COpenGLDoc::GetSharedRuntimePropertyBag()
 {
     return &m_SharedRuntimePropertyBag;
+}
+
+void COpenGLDoc::AddModelController( QuadModelController* controller )
+{
+    controller->SetModel(m_model.get());
 }

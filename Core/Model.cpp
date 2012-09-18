@@ -12,7 +12,6 @@ Model::~Model( void )
 {
 }
 
-
 void Model::_NotifyPropertyChanging( int property_id )
 {
     if( NULL != _callback )

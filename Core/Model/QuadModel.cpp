@@ -4,7 +4,7 @@
 
 QuadModel::QuadModel(void)
 {
-    _radius = 0.5;
+    _radius = 0.8;
 }
 
 QuadModel::~QuadModel(void)
@@ -16,6 +16,9 @@ double QuadModel::GetRadius() const
     return _radius;
 }
 
+/** some info
+    @callgraph
+*/
 void QuadModel::SetRadius( double radius )
 {
     _NotifyPropertyChanging(e_radius);

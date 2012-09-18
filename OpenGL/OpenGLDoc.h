@@ -60,19 +60,20 @@ public:
 public:
     const QuadModel * GetQuadModel() const;
 
+    void AddModelController(QuadModelController* controller);
+
     SharedPropertyBag * GetSharedRuntimePropertyBag() ;
 
-public:
-    afx_msg BOOL OnCommand(UINT id);
 
 private:
     void _OnPropertyChangeCallback(const Model::callback_params &);
 
-private:
-    std::unique_ptr<QuadModel> m_QuadModel;
-    std::unique_ptr<QuadModelController> m_QuadModelController;
+protected:
 
+    std::unique_ptr<QuadModel> m_model;
+#ifndef DOXYGEN
     SharedPropertyBag m_SharedRuntimePropertyBag;
+#endif
 
 
 };

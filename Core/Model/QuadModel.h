@@ -3,6 +3,7 @@
 
 #include "../Model.h"
 
+/// QuadModel
 class QuadModel : public Model
 {
 public:

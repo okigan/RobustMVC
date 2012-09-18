@@ -81,10 +81,25 @@ int ChoosePixelFormat(HDC hDC, bool isPrinting)
     return iPixelFormat;
 }
 
+HWND g_hWND = NULL;
 
 bool f(struct mg_connection *conn)
 {
-    HWND hWND = CreateWindow(_T("BUTTON"), NULL, WS_OVERLAPPEDWINDOW /*| WS_VISIBLE*/, 0, 0, 512, 512, NULL, NULL, NULL, NULL);
+    int width = 512;
+    int height = 512;
+
+    HWND hWND = NULL;
+    if( NULL == g_hWND) {
+        hWND = CreateWindow(_T("BUTTON"), 
+            NULL, 
+            WS_OVERLAPPEDWINDOW /*| WS_VISIBLE*/ | CS_OWNDC, 
+            0, 0, width, height, 
+            NULL, NULL, NULL, NULL);
+        g_hWND = hWND;
+    } else {
+        hWND = g_hWND;
+    }
+
     HDC hDC = GetDC(hWND);
     int pixelForamt = ChoosePixelFormat(hDC, false);
     PIXELFORMATDESCRIPTOR pfd = {0};
@@ -108,8 +123,7 @@ bool f(struct mg_connection *conn)
 
 
 
-    int width = 512;
-    int height = 512;
+
 
     // create a texture object
     GLuint textureId = 0;
@@ -207,7 +221,9 @@ bool f(struct mg_connection *conn)
 
     glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
     wglMakeCurrent(NULL, NULL);
+    wglDeleteContext(hRC);
     ReleaseDC(hWND, hDC);
+    //CloseWindow(hWND);
 
     BITMAPFILEHEADER bfh = {0};
     bfh.bfSize = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + buffer.size();
@@ -234,25 +250,36 @@ static void *callback(enum mg_event event,
 struct mg_connection *conn) {
     const struct mg_request_info *request_info = mg_get_request_info(conn);
 
-    if (event == MG_NEW_REQUEST) {
-        char content[1024];
-        int content_length = snprintf(content, sizeof(content),
-        "{                                                      \n"
-        "   \"QuadModel\" : {                                   \n"
-        "       \"radius\" : \"%lf\"                            \n"
-        "   }                                                   \n"
-        "}                                                      \n",
-        model.GetRadius());
-        
-        std::string str = 
-            "HTTP/1.1 200 OK\r\n"
-            "Content-Type: image/bmp\r\n"
-            "\r\n"
-           // "hello"
-            ;
+    printf("verb='%s' remote_ip='%d' remote_port='%d', uri='%s'\n", 
+        conn->request_info.request_method, 
+        conn->request_info.remote_ip,
+        conn->request_info.remote_port,
+        conn->request_info.uri);
 
-        mg_write(conn, str.c_str(), str.length());
-        f(conn);
+
+    if (event == MG_NEW_REQUEST) {
+
+        if( 0 == strcmp("/", conn->request_info.uri) ) {
+            char content[1024];
+            int content_length = snprintf(content, sizeof(content),
+                "{                                                      \n"
+                "   \"QuadModel\" : {                                   \n"
+                "       \"radius\" : \"%lf\"                            \n"
+                "   }                                                   \n"
+                "}                                                      \n",
+                model.GetRadius());
+
+            std::string str = 
+                "HTTP/1.1 200 OK\r\n"
+                "Content-Type: image/bmp\r\n"
+                "\r\n"
+                // "hello"
+                ;
+
+            mg_write(conn, str.c_str(), str.length());
+            f(conn);
+        }
+
 
         //mg_printf(conn,
         //    "HTTP/1.1 200 OK\r\n"

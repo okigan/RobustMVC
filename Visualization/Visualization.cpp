@@ -62,7 +62,7 @@ GLint CreateAndAttachShader( GLuint program, GLenum shaderType, const GLchar * s
     return status;
 }
 
-
+/// TODO: Change CheckError behavior to NOT bail out the whole program execution
 GLuint CreateShaderProgram( GLuint * program, const GLchar *vSource , const GLchar* fSource, char * logbuffer, int * loglen )
 {
     int initlen = *loglen;
@@ -91,49 +91,3 @@ GLuint CreateShaderProgram( GLuint * program, const GLchar *vSource , const GLch
 
     return status;
 }
-
-/*
-GLint CreateAndAttachShaderARB( GLuint program, GLenum shaderType, const GLchar * source, char * logbuffer, int * loglen)
-{
-    GLhandleARB shaderObj = glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB);
-    glShaderSource(vShader, 1, &source, NULL);
-    glCompileShader(vShader);
-
-    GLint status = 0;
-
-    glGetShaderiv(vShader, GL_COMPILE_STATUS, &status);
-    glGetShaderInfoLog(vShader, sizeof(logbuffer), loglen, logbuffer);
-
-    return status;
-}
-
-GLuint CreateShaderProgramARB( GLuint * program, const GLchar *vSource , const GLchar* fSource, char * logbuffer, int * loglen )
-{
-
-    int initlen = *loglen;
-
-    GLint status = glGetError()==GL_NO_ERROR; 
-
-    GLuint p = glCreateProgram();
-
-    *loglen = initlen;
-    status = CreateAndAttachShader(p, GL_VERTEX_SHADER, vSource, logbuffer, loglen);
-    CheckError(status, "Failed to link the shader program object.");
-
-    *loglen = initlen;
-    status = CreateAndAttachShader(p, GL_FRAGMENT_SHADER, fSource, logbuffer, loglen);
-    CheckError(status, "Failed to link the shader program object.");
-
-    glLinkProgram(p);
-    glGetProgramiv(p, GL_LINK_STATUS, &status);
-
-    *loglen = initlen;
-    glGetProgramInfoLog(p, sizeof(logbuffer), loglen, logbuffer);
-
-    CheckError(status, "Failed to link the shader program object.");
-
-    *program = p;
-
-    return status;
-}
-*/

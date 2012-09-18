@@ -2,6 +2,7 @@
 
 #include <functional>
 
+/// Model
 class Model
 {
 public:
@@ -28,10 +29,18 @@ protected:
     Model(void);
     virtual ~Model(void);
 
+    /** some info
+        @callgraph
+    */
     void _NotifyPropertyChanging(int property_id);
+
+    /** some info
+        @callgraph
+    */
     void _NotifyPropertyChanged(int property_id);
 
 private:
+    /// some info
     void _Touch();
 
 private:

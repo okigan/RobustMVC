@@ -1,11 +1,11 @@
 #pragma once
 
-#include <Windows.h>
 #include <gl/glew.h>
 #include <gl/GL.h>
 
 class QuadModel;
 
+/// QuadModelRender
 class QuadModelRender
 {
 public:
@@ -18,7 +18,7 @@ public:
     void Render();
 
 protected:
-    QuadModel const *  _quadModel;
+    QuadModel const *  _model;
     
     GLuint _program;
 };

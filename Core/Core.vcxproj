@@ -81,23 +81,16 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Model\QuadModel.h" />
     <ClInclude Include="Controller\QuadModelController.h" />
     <ClInclude Include="SharedPropertyBag.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="dllmain.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Model\QuadModel.cpp" />
     <ClCompile Include="Controller\QuadModelController.cpp" />
