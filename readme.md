@@ -29,19 +29,19 @@ Sometimes it's better to start off with desert, in this case let's look at snaps
 <table>
 <tr>
 <td>
-Desktop application
+<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/application.png" height="350" />
 </td>
 <td>
-Webserver and Chrome browser
+<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/browser.png" height="350" />
 </td>
 </tr>
 
 <tr>
 <td>
-<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/application.png" height="350" />
+Desktop application
 </td>
 <td>
-<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/browser.png" height="350" />
+Webserver and Chrome browser
 </td>
 </tr>
 </table>
@@ -50,5 +50,5 @@ Webserver and Chrome browser
 
 
 
-# Intergration  #
+# Intergratio  #
 ![](https://raw.github.com/okigan/OpenGL/master/Documentation/images/overview.png)
