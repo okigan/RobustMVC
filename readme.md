@@ -29,10 +29,10 @@ Sometimes it's better to start off with desert, in this case let's look at snaps
 <table>
 <tr>
 <td>
-<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/application.png" height="350" />
+<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/application.png" width="350" height="350" />
 </td>
 <td>
-<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/browser.png" height="350" />
+<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/browser.png" width="350" height="350" />
 </td>
 </tr>
 
