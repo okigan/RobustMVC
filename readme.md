@@ -54,7 +54,7 @@ projects.
 
 Now let's pick the actual platform and actually define parts that will be
 platform independent. Model and Controller shall be platform independent. 
-The rendering of views will be OpenGL and as OpenGL is cross platform, 
+The rendering of views will be OpenGL and as it is cross platform, 
 we'll keep the rendering part cross platform as well.
 
 Now the application itself -- the glue that bring everything together.
@@ -74,10 +74,10 @@ Sometimes it's better to start off with desert, in this case let's look at snaps
 <table>
 <tr>
 <td>
-<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/application.png" width="350" height="350" />
+<img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/application.png" width="350" height="350" />
 </td>
 <td>
-<img src="https://raw.github.com/okigan/OpenGL/master/Documentation/images/browser.png" width="350" height="350" />
+<img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/browser.png" width="350" height="350" />
 </td>
 </tr>
 
@@ -96,6 +96,6 @@ Webserver and Chrome browser
 
 
 # Integration 
-![](https://raw.github.com/okigan/OpenGL/master/Documentation/images/overview.png)
-![](https://raw.github.com/okigan/OpenGL/master/Documentation/images/dep_doc.png)
-![](https://raw.github.com/okigan/OpenGL/master/Documentation/images/dep_view.png)
+![](https://raw.github.com/okigan/RobustMVC/master/Documentation/images/overview.png)
+![](https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_doc.png)
+![](https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_view.png)
