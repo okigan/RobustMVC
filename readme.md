@@ -51,11 +51,14 @@ Reminder, we want to cover something reasonably complex, as to not skip
 important aspects. Let's do something graphical, something using OpenGL, 
 better yet lets use something a bit more recent -- shaders. Usually
 applications are not build from scratch, so let's use some external
-libraries and see how that fits in: Boost [2] is a popular one, as well
-as GLEW [3] to help out with OpenGL. How about maintainability and 
+libraries and see how that fits in: [Boost] is a popular one, as well
+as [GLEW] to help out with OpenGL. How about maintainability and 
 physical layout: establish separate modules for corresponding 
 functionality and allow to build unit tests as well allow reuse in other 
 projects.
+
+[Boost]: http://www.boost.org/
+[GLEW]: http://glew.sourceforge.net/
 
 Now let's pick the actual platform and actually define parts that will be
 platform independent. Model and Controller shall be platform independent. 
@@ -65,11 +68,13 @@ we'll keep the rendering part cross platform as well.
 Now the application itself -- the glue that initializes and binds everything 
 together (note, it's binding, not much else).
 We will actually setup two of these: one will use MFC while the other will be a standalone
-http webserver. Why to choose MFC, because **you** most likely already know 
+http webserver. Why to choose [MFC], because **you** most likely already know 
 the good and pain points about it. Why target a stand alone webserver, 
 obviously because web connected frameworks extremely useful. But also 
 because it is diametrically opposite of a desktop MFC application, so that 
 should show robustness of the approach.
+
+[MFC]: http://msdn.microsoft.com/en-us/library/ws8s10w4(v=vs.100).aspx
 
 To top it off, documentation shall be generated automatically and (if we
 get time) source code analysis and code coverage.
@@ -114,8 +119,11 @@ The two diagrams below physical layout of the project, with following areas of i
 - The Model and Controller have not dependencies on the viewing code.
 - In the gluing code the Document has no dependencies on the graphic api (OpenGL) used for visualization
 
-<img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_doc.png" width="750" />
-<img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_view.png" width="750" />
+<a href="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_doc.png">
+<img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_doc.png" width="750" /></a>
+
+<a href="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_view.png">
+<img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_view.png" width="750" /></a>
 
 # Summary
 The article presents key points on implementing and integrating Model-View-Controller framework into existing application development framework. The approach maintains minimal dependencies and facilitates cross platform development. Additionally the same Model-View-Controller implementation is integrated with a web server that allows to the same model \[rendering\] through a web browser.
