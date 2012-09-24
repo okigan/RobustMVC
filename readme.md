@@ -118,4 +118,10 @@ The two diagrams below physical layout of the project, with following areas of i
 <img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_view.png" width="750" />
 
 # Summary
+The article presents key points on implementing and integrating Model-View-Controller framework into existing application development framework. The approach maintains minimal dependencies and facilitates cross platform development. Additionally the same Model-View-Controller implementation is integrated with a web server that allows to the same model \[rendering\] through a web browser.
+
+# FAQ
+
+- Q: Where is the source?!
+- A: Still being prepared. Bookmark, vote or post comments to help me prioritize vs my other hobby projects. By the way contact me if you have experience with making **C++ Wizards** for Visual Studio 2010.
 
