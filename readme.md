@@ -30,7 +30,7 @@ technobabble]].
 
 # Robust Model-View-Controller
 A few innovations were identified to improve upon the
-Model-View-Controller [[MVVM]], but it seems much more important to
+Model-View-Controller [[MVVM], [MVP]], but it seems much more important to
 improve the way MVC is integrated with the platform/library used the
 build the application. More over, application today are rarely involve just one
 platform, some parts run on desktop and some are executed on the backed (or on one
@@ -43,7 +43,8 @@ with model/controller logic out of the way, it becomes much more straightforward
 to re-implement the view (but see below how simplify that task by re-using 
 visualization building blocks) for the appropriate platform.
 
-[mvvm]: http://en.wikipedia.org/wiki/Model_View_ViewModel
+[MVVM]: http://en.wikipedia.org/wiki/Model_View_ViewModel
+[MVP]: http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter
  
 # The scope
 So let's define the scope that would be covered in this example.
