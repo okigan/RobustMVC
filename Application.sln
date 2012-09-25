@@ -6,8 +6,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application", "OpenGL\OpenG
 		{275F56E2-193A-4739-A4E7-DB4304E1AB63} = {275F56E2-193A-4739-A4E7-DB4304E1AB63}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApplicationHandlers", "OpenGLHandlers\OpenGLHandlers.vcxproj", "{90750688-0953-4B6B-BE89-3B68515ED0F3}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prepare", "Prepare\Prepare.vcxproj", "{275F56E2-193A-4739-A4E7-DB4304E1AB63}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Visualization", "Visualization\Visualization.vcxproj", "{660E822A-D04D-4C14-8935-DC58FC46B92A}"
@@ -18,7 +16,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core.Test", "Core.Test\Core
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F890F21-A98E-4426-88A2-9569FA649D24}"
 	ProjectSection(SolutionItems) = preProject
-		Doxyfile = Doxyfile
 		Local.testsettings = Local.testsettings
 		OpenGL.vsmdi = OpenGL.vsmdi
 		readme.md = readme.md
@@ -47,12 +44,6 @@ Global
 		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Release|Win32.ActiveCfg = Release|Win32
 		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Release|Win32.Build.0 = Release|Win32
 		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Release|x64.ActiveCfg = Release|Win32
-		{90750688-0953-4B6B-BE89-3B68515ED0F3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{90750688-0953-4B6B-BE89-3B68515ED0F3}.Debug|Win32.Build.0 = Debug|Win32
-		{90750688-0953-4B6B-BE89-3B68515ED0F3}.Debug|x64.ActiveCfg = Debug|Win32
-		{90750688-0953-4B6B-BE89-3B68515ED0F3}.Release|Win32.ActiveCfg = Release|Win32
-		{90750688-0953-4B6B-BE89-3B68515ED0F3}.Release|Win32.Build.0 = Release|Win32
-		{90750688-0953-4B6B-BE89-3B68515ED0F3}.Release|x64.ActiveCfg = Release|Win32
 		{275F56E2-193A-4739-A4E7-DB4304E1AB63}.Debug|Win32.ActiveCfg = Debug|Win32
 		{275F56E2-193A-4739-A4E7-DB4304E1AB63}.Debug|Win32.Build.0 = Debug|Win32
 		{275F56E2-193A-4739-A4E7-DB4304E1AB63}.Debug|x64.ActiveCfg = Debug|x64
