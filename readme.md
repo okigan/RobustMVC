@@ -131,6 +131,52 @@ The two diagrams below physical layout of the project, with following areas of i
 <a href="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_view.png">
 <img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/dep_view.png" width="750" /></a>
 
+# Graphcs
+The example in this article targets [OpenGL 2.1] and [GLSL 1.20] shaders. The selection for this version of OpenGL/GLSL 
+is mainly to ensure it can be executed on the "run of the mill" hardware (and actually this will run on bare bones 
+Intel embeded graphics, which is common in today's laptops). At the same time, this will cover following important aspects: 
+
+- OpenGL context initialization
+- Usage of GLSL shaders with uniforms' values based on the model
+- Multiple views sharing the same OpenGL context
+- OpenGL context teardown when **all** the views are closed
+- Separate context for each document/model to enforce consistency
+
+[OpenGL 2.1]: http://en.wikipedia.org/wiki/OpenGL#OpenGL_2.1
+[GLSL 1.20]: http://en.wikipedia.org/wiki/OpenGL_Shading_Language#Versions
+
+The drawing effectively is a quad drawn using OpenGL's fixed pipeline, and then a second quad clipped 
+by radius of value specified in the model. The clipping is done using GLSL shader, which is kept pretty simple:
+
+    GLchar* vSource = 
+        "varying float x;                                                               \r"
+        "varying float y;                                                               \r"
+        "void main() {                                                                  \r"
+        "   gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                     \r"
+        "   gl_FrontColor = gl_Vertex;                                                  \r"
+        "   x = gl_Vertex.x;                                                            \r"
+        "   y = gl_Vertex.y;                                                            \r"
+        "}                                                                              \r"
+    ;
+
+    GLchar* fSource = 
+        "uniform float radius;                                                          \r"
+        "varying float x;                                                               \r"
+        "varying float y;                                                               \r"
+        "void main()                                                                    \r"
+        "{                                                                              \r"
+        "    float r = sqrt(x*x + y*y);                                                 \r"
+        "    if( r <= radius ) {                                                        \r"
+        "        gl_FragColor = gl_Color;                                               \r"
+        "    } else  {                                                                  \r"
+        "        gl_FragColor = vec4(0.01, 0.01, 0.01, 1);                              \r"
+        "   }                                                                           \r"
+        "}                                                                              \r"
+    ; 
+
+
+
+
 # Summary
 The article presents key points on implementing and integrating Model-View-Controller framework into existing application development framework. The approach maintains minimal dependencies and facilitates cross platform development. Additionally the same Model-View-Controller implementation is integrated with a web server that allows to the same model \[rendering\] through a web browser.
 
