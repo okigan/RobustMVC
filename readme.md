@@ -1,3 +1,8 @@
+<ul class="download">
+<li><a href="Application.zip">Download demo application</a></li>
+</ul>
+
+
 # Introduction
 In development of a sizable software product there are a number of
 aspects to consider: overall architecture, physical layout, object
@@ -134,3 +139,8 @@ The article presents key points on implementing and integrating Model-View-Contr
 - Q: Where is the source?!
 - A: Still being prepared. Bookmark, vote or post comments to help me prioritize vs my other hobby projects. By the way contact me if you have experience with making **C++ Wizards** for Visual Studio 2010.
 
+
+
+# See also
+- [Reliable Software Win32 MVC implementation](http://www.relisoft.com/win32/generic.html)
+- [The SBJ MVC Framework](http://www.codeproject.com/Articles/31190/The-SBJ-MVC-Framework-The-Model-from-Abstraction-t)
