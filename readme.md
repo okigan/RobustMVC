@@ -174,8 +174,11 @@ by radius of value specified in the model. The clipping is done using GLSL shade
         "}                                                                              \r"
     ; 
 
+#Unit Test and Test coverage
+This section shows snapshots for unit test reports as well as coverage attained with the unit tests:
+<img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/unit_tests.png" width="700"/>
 
-
+<img src="https://raw.github.com/okigan/RobustMVC/master/Documentation/images/coverage.png" width="700"/>
 
 # Summary
 The article presents key points on implementing and integrating Model-View-Controller framework into existing application development framework. The approach maintains minimal dependencies and facilitates cross platform development. Additionally the same Model-View-Controller implementation is integrated with a web server that allows to the same model \[rendering\] through a web browser.
