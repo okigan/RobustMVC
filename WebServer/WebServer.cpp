@@ -83,7 +83,7 @@ int ChoosePixelFormat(HDC hDC, bool isPrinting)
 
 HWND g_hWND = NULL;
 
-bool f(struct mg_connection *conn)
+bool write_quad_model_as_bmp(struct mg_connection *conn)
 {
     int width = 512;
     int height = 512;
@@ -248,46 +248,38 @@ bool f(struct mg_connection *conn)
 
 static void *callback(enum mg_event event,
 struct mg_connection *conn) {
-    const struct mg_request_info *request_info = mg_get_request_info(conn);
-
-    printf("verb='%s' remote_ip='%d' remote_port='%d', uri='%s'\n", 
-        conn->request_info.request_method, 
-        conn->request_info.remote_ip,
-        conn->request_info.remote_port,
-        conn->request_info.uri);
-
 
     if (event == MG_NEW_REQUEST) {
+        const struct mg_request_info *request_info = mg_get_request_info(conn);
 
-        if( 0 == strcmp("/", conn->request_info.uri) ) {
-            char content[1024];
-            int content_length = snprintf(content, sizeof(content),
-                "{                                                      \n"
-                "   \"QuadModel\" : {                                   \n"
-                "       \"radius\" : \"%lf\"                            \n"
-                "   }                                                   \n"
-                "}                                                      \n",
-                model.GetRadius());
+        printf("verb='%s' remote_ip='%d' remote_port='%d', uri='%s'\n", 
+            conn->request_info.request_method, 
+            conn->request_info.remote_ip,
+            conn->request_info.remote_port,
+            conn->request_info.uri);
+
+        if(     0 == strcmp("/", conn->request_info.uri) 
+            ||  0 == strcmp("/favicon.ico", conn->request_info.uri))
+        {
+            // json (for future)
+            //char content[1024];
+            //int content_length = snprintf(content, sizeof(content),
+            //    "{                                                      \n"
+            //    "   \"QuadModel\" : {                                   \n"
+            //    "       \"radius\" : \"%lf\"                            \n"
+            //    "   }                                                   \n"
+            //    "}                                                      \n",
+            //    model.GetRadius());
 
             std::string str = 
                 "HTTP/1.1 200 OK\r\n"
                 "Content-Type: image/bmp\r\n"
                 "\r\n"
-                // "hello"
                 ;
 
             mg_write(conn, str.c_str(), str.length());
-            f(conn);
+            write_quad_model_as_bmp(conn);
         }
-
-
-        //mg_printf(conn,
-        //    "HTTP/1.1 200 OK\r\n"
-        //    "Content-Type: text/plain\r\n"
-        //    "Content-Length: %d\r\n"        // Always set Content-Length
-        //    "\r\n"
-        //    "%s",
-        //    content_length, content);
 
         // Mark as processed
         return "";
@@ -297,13 +289,34 @@ struct mg_connection *conn) {
 }
 
 int _tmain(int argc, _TCHAR* argv[]) {
+    int nport = 8080;
+
+    printf("See more information on: http://www.codeproject.com/Articles/464158/Robust-MVC" "\n");
+    printf("\n");
+
     controler.SetModel(&model);
 
-    struct mg_context *ctx;
-    const char *options[] = {"listening_ports", "8080", NULL};
+    char port[80] = "";
+    snprintf(port, ARRAYSIZE(port), "%d", nport);
 
-    ctx = mg_start(&callback, NULL, options);
+    const char *options[] = {"listening_ports", port, NULL};
+
+    struct mg_context *ctx = mg_start(&callback, NULL, options);
+
+    if( NULL == ctx ) {
+        printf("Failed to start server (is the %d port already taken?)\n", nport);
+        return -1;
+    }
+    
+    printf("\n");
+    printf("Navigate to: http://localhost:%d\n", nport);
+    printf("\n\n");
+
+    printf("Press Control+C to stop web server and exit.\n");
+    printf("\n\n");
+
     getchar();  // Wait until user hits "enter"
+
     mg_stop(ctx);
 
     return 0;
