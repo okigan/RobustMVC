@@ -14,8 +14,8 @@
 
 #include <propkey.h>
 
-#include <Core/Model/QuadModel.h>
-#include <Core/Controller/QuadModelController.h>
+#include <Core/Model/quad_model.h>
+#include <Core/Controller/quad_model_controller.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -33,9 +33,9 @@ END_MESSAGE_MAP()
 
 COpenGLDoc::COpenGLDoc()
 {
-    m_model.reset(new QuadModel());
+    m_model.reset(new quad_model());
 
-    Model::Callback callback = std::bind(&COpenGLDoc::_OnPropertyChangeCallback, this, std::placeholders::_1);
+    model::Callback callback = std::bind(&COpenGLDoc::_OnPropertyChangeCallback, this, std::placeholders::_1);
 
     m_model->SetCallback(callback);
 }
@@ -144,11 +144,11 @@ void COpenGLDoc::Dump(CDumpContext& dc) const
 
 // COpenGLDoc commands
 
-void COpenGLDoc::_OnPropertyChangeCallback( const Model::callback_params & params)
+void COpenGLDoc::_OnPropertyChangeCallback( const model::callback_params & params)
 {
     if( params.model == m_model.get() )
     {
-        if( Model::e_changing == params.stage )
+        if( model::e_changing == params.stage )
         {
 
         }
@@ -163,18 +163,18 @@ void COpenGLDoc::_OnPropertyChangeCallback( const Model::callback_params & param
     }
 }
 
-const QuadModel * COpenGLDoc::GetQuadModel() const
+const quad_model * COpenGLDoc::Getquad_model() const
 {
     return m_model.get();
 }
 
 
-SharedPropertyBag * COpenGLDoc::GetSharedRuntimePropertyBag()
+dictionary * COpenGLDoc::GetSharedRuntimePropertyBag()
 {
     return &m_SharedRuntimePropertyBag;
 }
 
-void COpenGLDoc::AddModelController( QuadModelController* controller )
+void COpenGLDoc::AddModelController( quad_model_controller* controller )
 {
-    controller->SetModel(m_model.get());
+    controller->set_model(m_model.get());
 }

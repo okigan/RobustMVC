@@ -1,15 +1,15 @@
 #include "StdAfx.h"
-#include "QuadModelRender.h"
+#include "quad_model_render.h"
 
 #include <exception>
 
-#include <Core/Model/QuadModel.h>
+#include <Core/Model/quad_model.h>
 
 
 #include "../Visualization.h"
 
 
-QuadModelRender::QuadModelRender(void)
+quad_modelRender::quad_modelRender(void)
 {
     _model = nullptr;
 
@@ -17,22 +17,22 @@ QuadModelRender::QuadModelRender(void)
 }
 
 
-QuadModelRender::~QuadModelRender(void)
+quad_modelRender::~quad_modelRender(void)
 {
 }
 
-QuadModel const * QuadModelRender::GetQuadModel() const
+quad_model const * quad_modelRender::Getquad_model() const
 {
     return _model;
 }
 
-void QuadModelRender::SetQuadModel( QuadModel const * val )
+void quad_modelRender::Setquad_model( quad_model const * val )
 {
     _model = val;
 }
 
 
-bool QuadModelRender::Initialize( char * logbuffer, int * loglen )
+bool quad_modelRender::Initialize( char * logbuffer, int * loglen )
 {
     const GLubyte * vendor = glGetString(GL_VENDOR);
     const GLubyte * render = glGetString(GL_RENDERER);
@@ -71,13 +71,13 @@ bool QuadModelRender::Initialize( char * logbuffer, int * loglen )
     return GL_NO_ERROR ==  status;
 }
 
-void QuadModelRender::Render()
+void quad_modelRender::Render()
 {
     glUseProgram(_program);
     //glUseProgram(0);
     {
         GLint location = glGetUniformLocation(_program, "radius");
-        glUniform1f(location, (float)_model->GetRadius());
+        glUniform1f(location, (float)_model->get_radius());
 
         DrawQuad();
     }

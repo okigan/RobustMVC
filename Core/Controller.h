@@ -1,15 +1,15 @@
 #pragma once
 
-class Model;
+class model;
 
-class Controller
+class controller
 {
 public:
-    Controller( void );
-    virtual ~Controller( void );
+    controller( void );
+    virtual ~controller( void );
 
-    virtual Model* GetModel( ) const = 0;
+    virtual model* get_model( ) const = 0;
 
-    virtual bool IsActionEnabled( int action ) = 0;
+    virtual bool is_action_enabled( int action_id ) = 0;
 };
 

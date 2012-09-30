@@ -1,17 +1,17 @@
 #include "StdAfx.h"
-#include "QuadModel.h"
+#include "quad_model.h"
 
 
-QuadModel::QuadModel(void)
+quad_model::quad_model(void)
 {
     _radius = 0.8;
 }
 
-QuadModel::~QuadModel(void)
+quad_model::~quad_model(void)
 {
 }
 
-double QuadModel::GetRadius() const
+double quad_model::get_radius() const
 {
     return _radius;
 }
@@ -19,7 +19,7 @@ double QuadModel::GetRadius() const
 /** some info
     @callgraph
 */
-void QuadModel::SetRadius( double radius )
+void quad_model::set_radius( double radius )
 {
     _NotifyPropertyChanging(e_radius);
 

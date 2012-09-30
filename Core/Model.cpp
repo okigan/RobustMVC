@@ -2,17 +2,17 @@
 #include "Model.h"
 
 
-Model::Model( void )
+model::model( void )
 {
     _change_stamp = 0;
 }
 
 
-Model::~Model( void )
+model::~model( void )
 {
 }
 
-void Model::_NotifyPropertyChanging( int property_id )
+void model::_NotifyPropertyChanging( int property_id )
 {
     if( NULL != _callback )
     {
@@ -21,7 +21,7 @@ void Model::_NotifyPropertyChanging( int property_id )
     }
 }
 
-void Model::_NotifyPropertyChanged( int property_id )
+void model::_NotifyPropertyChanged( int property_id )
 {
     _Touch();
 
@@ -32,17 +32,17 @@ void Model::_NotifyPropertyChanged( int property_id )
     }
 }
 
-void Model::SetCallback( Callback & callback )
+void model::SetCallback( Callback & callback )
 {
     _callback = callback;
 }
 
-void Model::_Touch( )
+void model::_Touch( )
 {
     _change_stamp++;
 }
 
-unsigned char Model::GetChangeStamp() const
+unsigned char model::GetChangeStamp() const
 {
     return _change_stamp;
 }

@@ -11,8 +11,8 @@
 
 #include <memory>
 
-class QuadModelRender;
-class QuadModelController;
+class quad_modelRender;
+class quad_model_controller;
 
 
 class COpenGLView : public CView
@@ -67,12 +67,12 @@ protected:
     BOOL SetPixelFormatOrCreateRenderingContext(HDC hDC, bool isPrinting, int * pPixelFormat, HGLRC * phRC);
 
 protected:
-    std::unique_ptr<QuadModelController> m_controller;
+    std::unique_ptr<quad_model_controller> m_controller;
 
-    std::unique_ptr<QuadModelRender>    m_render;
+    std::unique_ptr<quad_modelRender>    m_render;
 
-    std::shared_ptr<boost::any>         m_PixelFormat;
-    std::shared_ptr<boost::any>         m_RenderingContext;
+    std::shared_ptr<int>                m_PixelFormat;
+    std::shared_ptr<HGLRC>              m_RenderingContext;
 
     COpenGLDoc*&    m_pDocument;
 

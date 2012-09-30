@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="QuadModel">
+  <Class Name="quad_model">
     <Position X="5.5" Y="0.5" Width="3" />
     <TypeIdentifier>
       <HashCode>CAAAAAAQAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAiAAAA=</HashCode>
-      <FileName>Model\QuadModel.h</FileName>
+      <FileName>Model\quad_model.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Model">

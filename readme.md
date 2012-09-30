@@ -1,6 +1,7 @@
 <ul class="download">
 <li><a href="Application.zip">Download demo application</a></li>
 <li><a href="Webserver.zip">Download demo web server</a></li>
+<li><a href="Documentation/images/robust_mvc.mp4">Download screen-cast of web session</a></li>
 </ul>
 
 
@@ -108,6 +109,14 @@ Webserver and Chrome browser
 </td>
 </tr>
 </table>
+
+Below is a screen cast using the web server. Note the change radius is increased/decreased until specified limits are reacheds. 
+The limits are enforced by the controller. 
+
+<video autoplay="autoplay" controls="controls">
+  <source src="Documentation/images/robust_mvc.mp4"/>
+  Your browser does not support the video tag.
+</video>
 
 
 # Integration

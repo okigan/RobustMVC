@@ -3,7 +3,7 @@
 #include <functional>
 
 /// Model
-class Model
+class model
 {
 public:
     enum stage
@@ -14,7 +14,7 @@ public:
 
     struct callback_params
     {
-        Model*  model;
+        model*  model;
         stage   stage;
         int     property_id;
     };
@@ -26,8 +26,8 @@ public:
     unsigned char GetChangeStamp() const;
 
 protected:
-    Model(void);
-    virtual ~Model(void);
+    model(void);
+    virtual ~model(void);
 
     /** some info
         @callgraph

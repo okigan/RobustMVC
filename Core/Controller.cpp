@@ -2,11 +2,11 @@
 #include "Controller.h"
 
 
-Controller::Controller(void)
+controller::controller(void)
 {
 }
 
 
-Controller::~Controller(void)
+controller::~controller(void)
 {
 }

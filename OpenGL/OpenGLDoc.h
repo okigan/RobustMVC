@@ -8,10 +8,10 @@
 #include <memory>
 
 #include <Core/Model.h>
-#include <Core/SharedPropertyBag.h>
+#include <Core/dictionary.h>
 
-class QuadModel;
-class QuadModelController;
+class quad_model;
+class quad_model_controller;
 
 
 
@@ -58,21 +58,21 @@ protected:
 public:
 
 public:
-    const QuadModel * GetQuadModel() const;
+    const quad_model * Getquad_model() const;
 
-    void AddModelController(QuadModelController* controller);
+    void AddModelController(quad_model_controller* controller);
 
-    SharedPropertyBag * GetSharedRuntimePropertyBag() ;
+    dictionary * GetSharedRuntimePropertyBag() ;
 
 
 private:
-    void _OnPropertyChangeCallback(const Model::callback_params &);
+    void _OnPropertyChangeCallback(const model::callback_params &);
 
 protected:
 
-    std::unique_ptr<QuadModel> m_model;
+    std::unique_ptr<quad_model> m_model;
 #ifndef DOXYGEN
-    SharedPropertyBag m_SharedRuntimePropertyBag;
+    dictionary m_SharedRuntimePropertyBag;
 #endif
 
 

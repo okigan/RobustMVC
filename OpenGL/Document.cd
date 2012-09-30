@@ -7,8 +7,8 @@
       <FileName>OpenGLDoc.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="m_QuadModel" />
-      <Field Name="m_QuadModelController" />
+      <Field Name="m_quad_model" />
+      <Field Name="m_quad_model_controller" />
     </ShowAsAssociation>
   </Class>
   <Class Name="COpenGLView">
@@ -18,7 +18,7 @@
       <FileName>OpenGLView.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="m_QuadModelRender" />
+      <Field Name="m_quad_modelRender" />
     </ShowAsAssociation>
   </Class>
   <Class Name="std::unique_ptr&lt;_Ty, _Dx&gt;">

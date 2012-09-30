@@ -12,8 +12,8 @@
 #include "OpenGLDoc.h"
 #include "OpenGLView.h"
 
-#include <Core/Model/QuadModel.h>
-#include <Core/Controller/QuadModelController.h>
+#include <Core/Model/quad_model.h>
+#include <Core/Controller/quad_model_controller.h>
 
 #include <gl/glew.h>
 #pragma comment(lib, "glew32.lib")
@@ -26,7 +26,7 @@
 
 #include <Visualization/Visualization.h>
 
-#include <Visualization/Render/QuadModelRender.h>
+#include <Visualization/Render/quad_model_render.h>
 
 
 
@@ -121,7 +121,7 @@ void COpenGLView::OnDraw(CDC* pDC)
 
     //glUseProgram(m_program);
     //GLint location = glGetUniformLocation(m_program, "radius");
-    //glUniform1f(location, (float)GetDocument()->GetQuadModel()->GetRadius());
+    //glUniform1f(location, (float)GetDocument()->Getquad_model()->GetRadius());
     //display();
 
     if( nullptr != m_render ) {
@@ -246,11 +246,9 @@ int ChoosePixelFormat(HDC hDC, bool isPrinting)
 
 
 // COpenGLView message handlers
-void DeleterBoostAnyHGLRC( boost::any* ptr)
+void DeleterBoostAnyHGLRC( HGLRC* ptr)
 {
-    HGLRC hRC = boost::any_cast<HGLRC>(*ptr);
-
-    BOOL bRet = wglDeleteContext(hRC);
+    BOOL bRet = wglDeleteContext(*ptr);
 
     delete ptr;
 }
@@ -261,8 +259,8 @@ int COpenGLView::OnCreate(LPCREATESTRUCT lpCreateStruct)
         return -1;
     
     auto pb = GetDocument()->GetSharedRuntimePropertyBag();
-    auto value = pb->Get("pixel_format");
-    int pixelFormat = nullptr != value? boost::any_cast<int>(*value) : -1;
+    auto & value = pb->find("pixel_format");
+    int pixelFormat = ( !value.empty() ) ? boost::any_cast<int>(value) : -1;
 
     CDC* pDC = GetDC();
     {
@@ -273,15 +271,15 @@ int COpenGLView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
         BOOL bRet = SetPixelFormatOrCreateRenderingContext(hDC, isPrinting, &pixelFormat, &hRC);
 
-        if( nullptr == value ) {
-            m_PixelFormat.reset(new boost::any(pixelFormat));
-            m_RenderingContext.reset(new boost::any(hRC), DeleterBoostAnyHGLRC);
-
-            pb->Put("pixel_format", m_PixelFormat);
-            pb->Put("rendering_context", m_RenderingContext);
+        if( value.empty() ) {
+            m_PixelFormat.reset(new int(pixelFormat));
+            m_RenderingContext.reset(new HGLRC(hRC), DeleterBoostAnyHGLRC);
+            
+            pb->insert_as_weak_ptr("pixel_format", m_PixelFormat);
+            pb->insert_as_weak_ptr("rendering_context", m_RenderingContext);
         } else {
-            m_PixelFormat       = pb->Get("pixel_format");
-            m_RenderingContext  = pb->Get("rendering_context");
+            m_PixelFormat       = boost::any_cast<decltype(m_PixelFormat        )>(pb->find("pixel_format"));
+            m_RenderingContext  = boost::any_cast<decltype(m_RenderingContext   )>(pb->find("rendering_context"));
         }
     }
     ReleaseDC(pDC);
@@ -351,13 +349,13 @@ void COpenGLView::OnInitialUpdate( )
 {
     CView::OnInitialUpdate( );
 
-    m_controller.reset( new QuadModelController() );
+    m_controller.reset( new quad_model_controller() );
 
     GetDocument()->AddModelController(m_controller.get());
 
-    m_render.reset( new QuadModelRender() );
+    m_render.reset( new quad_modelRender() );
 
-    m_render->SetQuadModel( GetDocument()->GetQuadModel() );
+    m_render->Setquad_model( GetDocument()->Getquad_model() );
 
     CDC* pDC = GetDC( );
     HDC hDC = pDC->GetSafeHdc( );
@@ -379,8 +377,8 @@ BOOL COpenGLView::OnCommand(UINT id)
 {
     switch( id )
     {
-    case ID_COMMAND_INCREASE: m_controller->IncreaseRadius(); break;
-    case ID_COMMAND_DECREASE: m_controller->DecreaseRadius(); break;
+    case ID_COMMAND_INCREASE: m_controller->increase_radius(); break;
+    case ID_COMMAND_DECREASE: m_controller->decrease_radius(); break;
     }
 
     return TRUE;
@@ -393,7 +391,7 @@ void COpenGLView::OnUpdateCommandUI( CCmdUI* pUI )
 
     switch( pUI->m_nID)
     {
-    case ID_COMMAND_INCREASE: pUI->Enable(m_controller->IsActionEnabled(QuadModelController::e_increase_radius)); break;
-    case ID_COMMAND_DECREASE: pUI->Enable(m_controller->IsActionEnabled(QuadModelController::e_decrease_radius)); break;
+    case ID_COMMAND_INCREASE: pUI->Enable(m_controller->is_action_enabled(quad_model_controller::e_increase_radius)); break;
+    case ID_COMMAND_DECREASE: pUI->Enable(m_controller->is_action_enabled(quad_model_controller::e_decrease_radius)); break;
     }
 }

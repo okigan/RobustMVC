@@ -77,24 +77,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Model.cd" />
-    <None Include="ReadMe.txt" />
+    <None Include="model.cd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Controller.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Model\QuadModel.h" />
-    <ClInclude Include="Controller\QuadModelController.h" />
-    <ClInclude Include="SharedPropertyBag.h" />
+    <ClInclude Include="controller.h" />
+    <ClInclude Include="model.h" />
+    <ClInclude Include="Model\quad_model.h" />
+    <ClInclude Include="Controller\quad_model_controller.h" />
+    <ClInclude Include="dictionary.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Model\QuadModel.cpp" />
-    <ClCompile Include="Controller\QuadModelController.cpp" />
-    <ClCompile Include="SharedPropertyBag.cpp" />
+    <ClCompile Include="controller.cpp" />
+    <ClCompile Include="core.cpp" />
+    <ClCompile Include="model.cpp" />
+    <ClCompile Include="Model\quad_model.cpp" />
+    <ClCompile Include="Controller\quad_model_controller.cpp" />
+    <ClCompile Include="dictionary.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

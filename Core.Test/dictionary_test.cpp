@@ -5,7 +5,7 @@
 #include <memory>
 #include <boost/any.hpp>
 
-#include <Core/SharedPropertyBag.h>
+#include <Core/dictionary.h>
 
 #pragma managed(pop)
 
@@ -18,32 +18,32 @@ using namespace	Microsoft::VisualStudio::TestTools::UnitTesting;
 namespace CoreTest
 {
 	[TestClass]
-	public ref class SharedPropertyBagTest
+	public ref class dictionary_test_suite
 	{
 	public: 
 		[TestMethod]
-		void TestSharedPropertyBag()
+		void dictionary_test()
 		{
-            SharedPropertyBag spb;
+            dictionary spb;
 
             std::string key = "key";
             auto raw_in_value = 11;
-            auto in_value = std::make_shared<boost::any>(raw_in_value);
+            auto in_value = std::make_shared<int>(raw_in_value);
 
-            spb.Put(key, in_value);
+            spb.insert(key, raw_in_value);
 
-            std::shared_ptr<boost::any> out_value;
-            bool found = spb.Get(key, out_value);
+            boost::any out_value;
+            bool found = spb.find(key, out_value);
 
             Assert::AreEqual(true, found);
 
-            auto raw_out_value = boost::any_cast<decltype(raw_in_value)>(*out_value);
+            auto raw_out_value = boost::any_cast<decltype(raw_in_value)>(out_value);
 
             Assert::AreEqual(raw_in_value, raw_out_value);
 
-            Assert::AreEqual(1U, spb.Size());
+            Assert::AreEqual(1U, spb.size());
 
-            found = spb.Get("does_not_exist", out_value);
+            found = spb.find("does_not_exist", out_value);
 
             Assert::AreEqual(false, found);
 
