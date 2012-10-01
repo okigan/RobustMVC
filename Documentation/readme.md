@@ -110,7 +110,7 @@ Webserver and Chrome browser
 </tr>
 </table>
 
-Below is a screen cast using the web server. Note the change radius is increased/decreased until specified limits are reacheds. 
+Below is a screen cast using the web server. Note, the radius is increased/decreased until specified limits are reacheds. 
 The limits are enforced by the controller. 
 
 <video autoplay="autoplay" controls="controls">
