@@ -1,11 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application", "OpenGL\OpenGL.vcxproj", "{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{275F56E2-193A-4739-A4E7-DB4304E1AB63} = {275F56E2-193A-4739-A4E7-DB4304E1AB63}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prepare", "Prepare\Prepare.vcxproj", "{275F56E2-193A-4739-A4E7-DB4304E1AB63}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Visualization", "Visualization\Visualization.vcxproj", "{660E822A-D04D-4C14-8935-DC58FC46B92A}"
@@ -18,12 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
 		OpenGL.vsmdi = OpenGL.vsmdi
-		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WebServer", "WebServer\WebServer.vcxproj", "{47103808-0D28-4F67-A8D5-8CAA17369984}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Documentation", "Documentation\Documentation.vcxproj", "{89B0D26C-1941-4852-AE69-1BAF05A54245}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application", "Application\Application.vcxproj", "{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -36,12 +32,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Debug|Win32.Build.0 = Debug|Win32
-		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Debug|x64.ActiveCfg = Debug|Win32
-		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Release|Win32.ActiveCfg = Release|Win32
-		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Release|Win32.Build.0 = Release|Win32
-		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Release|x64.ActiveCfg = Release|Win32
 		{275F56E2-193A-4739-A4E7-DB4304E1AB63}.Debug|Win32.ActiveCfg = Debug|Win32
 		{275F56E2-193A-4739-A4E7-DB4304E1AB63}.Debug|Win32.Build.0 = Debug|Win32
 		{275F56E2-193A-4739-A4E7-DB4304E1AB63}.Debug|x64.ActiveCfg = Debug|x64
@@ -80,6 +70,12 @@ Global
 		{89B0D26C-1941-4852-AE69-1BAF05A54245}.Release|Win32.ActiveCfg = Release|Win32
 		{89B0D26C-1941-4852-AE69-1BAF05A54245}.Release|Win32.Build.0 = Release|Win32
 		{89B0D26C-1941-4852-AE69-1BAF05A54245}.Release|x64.ActiveCfg = Release|Win32
+		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Debug|Win32.Build.0 = Debug|Win32
+		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Debug|x64.ActiveCfg = Debug|Win32
+		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Release|Win32.ActiveCfg = Release|Win32
+		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Release|Win32.Build.0 = Release|Win32
+		{7DAD80B6-293C-4BC7-B44E-60DA669B4CB3}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
