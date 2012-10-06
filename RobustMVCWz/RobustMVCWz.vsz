@@ -1,0 +1,6 @@
+VSWIZARD 7.0
+Wizard=VsWizard.VsWizardEngine.10.0
+
+Param="WIZARD_NAME = RobustMVCWz"
+Param="ABSOLUTE_PATH = C:\Users\iokulist\Documents\Visual Studio 2010\Projects\OpenGL\RobustMVCWz"
+Param="FALLBACK_LCID = 1033"

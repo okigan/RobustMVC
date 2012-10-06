@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6F426049-48D3-496A-9042-ACA5D4045551}</ProjectGuid>
+    <Keyword>CustomAppWizProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="1033\Images\DottedHori.gif">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="1033\Images\DottedVert.gif">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="1033\Images\spacer.gif">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="1033\NewStyles.css">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="default.vcxproj">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="HTML\1033\default.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="Images\RobustMVCWz.gif">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="Images\RobustMVCWz_Background.gif">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="RobustMVCWz.ico" />
+    <None Include="RobustMVCWz.vsdir" />
+    <None Include="RobustMVCWz.vsz" />
+    <None Include="Scripts\1033\default.js">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="Templates\1033\ReadMe.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="Templates\1033\Sample.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="Templates\1033\Templates.inf">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
