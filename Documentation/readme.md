@@ -115,7 +115,7 @@ Below is a screen cast using the web server. Note, the radius is increased/decre
 The limits are enforced by the controller. 
 
 <video autoplay="autoplay" controls="controls">
-  <source src="robust_mvc.mp4"/>
+  <source src="https://raw.github.com/okigan/RobustMVC/master/Documentation/robust_mvc.mp4">
   Your browser does not support the video tag.
 </video>
 
