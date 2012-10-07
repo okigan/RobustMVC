@@ -61,9 +61,18 @@
     <None Include="Images\RobustMVCWz_Background.gif">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="RobustMVCWz.ico" />
-    <None Include="RobustMVCWz.vsdir" />
-    <None Include="RobustMVCWz.vsz" />
+    <None Include="install.js">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="RobustMVCW.ico">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="RobustMVCW.vsdir">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
+    <None Include="RobustMVCW.vsz">
+      <DeploymentContent>false</DeploymentContent>
+    </None>
     <None Include="Scripts\1033\default.js">
       <DeploymentContent>true</DeploymentContent>
     </None>

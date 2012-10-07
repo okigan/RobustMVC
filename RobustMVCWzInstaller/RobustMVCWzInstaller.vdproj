@@ -957,6 +957,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_26953B01EE3941BB86BE1E7D78ADB5AA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_26C3F4316ACD4085A1F07EF37A0522C7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2128,6 +2134,12 @@
         "Entry"
         {
         "MsmKey" = "8:_555C19C9AB6541D6A0D05BCCB9F33A8E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_559B8B1367EE40789E23AD29DFEC1C46"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -4107,6 +4119,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A2F403C0A46C4E508C9AFC2FB879DBC0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A307B96CBA9744AC9108ABE6A07CC8A5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -5703,6 +5721,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_EA57C8D522724DF4BF0D805680A299D5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EB12DDA85B3A4B75B719034D5F62A03A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -6321,6 +6345,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -9469,6 +9506,26 @@
             "TargetName" = "8:ssi9.shtml"
             "Tag" = "8:"
             "Folder" = "8:_7BF04A90294C4892926453DBF9C84C5B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26953B01EE3941BB86BE1E7D78ADB5AA"
+            {
+            "SourcePath" = "8:..\\RobustMVCWz\\RobustMVCW.ico"
+            "TargetName" = "8:RobustMVCW.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_3123005938BC4787BBB24C134E95B721"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -13389,6 +13446,26 @@
             "TargetName" = "8:GL_APPLE_texture_range"
             "Tag" = "8:"
             "Folder" = "8:_43FC7A80904543D6AD3B1B01747D1513"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_559B8B1367EE40789E23AD29DFEC1C46"
+            {
+            "SourcePath" = "8:..\\RobustMVCWz\\RobustMVCW.vsz"
+            "TargetName" = "8:RobustMVCW.vsz"
+            "Tag" = "8:"
+            "Folder" = "8:_3123005938BC4787BBB24C134E95B721"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -19983,6 +20060,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2F403C0A46C4E508C9AFC2FB879DBC0"
+            {
+            "SourcePath" = "8:..\\RobustMVCWz\\install.js"
+            "TargetName" = "8:install.js"
+            "Tag" = "8:"
+            "Folder" = "8:_3CC02BA7C65644EE8802F22D7994DBFE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A307B96CBA9744AC9108ABE6A07CC8A5"
             {
             "SourcePath" = "8:..\\ext\\boost\\boost\\mpl\\aux_\\config\\ttp.hpp"
@@ -25303,6 +25400,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EA57C8D522724DF4BF0D805680A299D5"
+            {
+            "SourcePath" = "8:..\\RobustMVCWz\\RobustMVCW.vsdir"
+            "TargetName" = "8:RobustMVCW.vsdir"
+            "Tag" = "8:"
+            "Folder" = "8:_3123005938BC4787BBB24C134E95B721"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EB12DDA85B3A4B75B719034D5F62A03A"
             {
             "SourcePath" = "8:..\\ext\\glew-1.9.0\\auto\\extensions\\GL_AMD_stencil_operation_extended"
@@ -27171,7 +27288,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_38EFF1ED9368448A92CA8FECB4785560"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[CommonAppDataFolder]\\[Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -27179,7 +27296,7 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_514FC4DB9B624FB9A1E9181E539BE200"
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_E4E841C48F8B4639BEA6007B33DB25D1"
                     {
                     "Name" = "8:Templates"
                     "AlwaysCreate" = "11:FALSE"
@@ -28204,26 +28321,49 @@
                     }
                 }
             }
-            "{1525181F-901A-416C-8A58-119130FE478E}:_7F297017C17F45638F16D75C29C49DE1"
+            "{994432C3-9487-495D-8656-3E829A8DBDDE}:_3CC02BA7C65644EE8802F22D7994DBFE"
             {
-            "Name" = "8:#1919"
+            "DefaultLocation" = "8:[LocalAppDataFolder]"
+            "Name" = "8:LocalAppDataFolder"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
-            "Property" = "8:ProgramMenuFolder"
+            "Property" = "8:NEWPROPERTY1"
                 "Folders"
                 {
                 }
             }
-            "{1525181F-901A-416C-8A58-119130FE478E}:_BB991FBFFC7142619AB0F7DCE82D37CA"
+            "{1525181F-901A-416C-8A58-119130FE478E}:_AAEA80C8C67F4EB19197B4958C6A5776"
             {
-            "Name" = "8:#1916"
+            "Name" = "8:#1918"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
-            "Property" = "8:DesktopFolder"
+            "Property" = "8:PersonalFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_498A1449DF1A4313B21B543580FCFC5B"
+                    {
+                    "Name" = "8:Visual Studio 2010"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_CDBEAAC8E3F44134B31A2F588AE21E30"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_3123005938BC4787BBB24C134E95B721"
+                            {
+                            "Name" = "8:Wizards"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_2E827B9E2CD5447E9B5FBC98FBE8D81F"
+                                "Folders"
+                                {
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -28241,22 +28381,22 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:RobustMVCWzInstaller"
+        "ProductName" = "8:RobustMVC"
         "ProductCode" = "8:{D1C75791-354A-473A-96E6-FAF1A65E7E24}"
-        "PackageCode" = "8:{365C4C29-4DF6-4449-A256-A453D78BFD83}"
+        "PackageCode" = "8:{0D46171C-7665-4A2A-91D4-8BA161429937}"
         "UpgradeCode" = "8:{DF397471-7288-4455-89B1-4E0A21C29C35}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Microsoft"
+        "Manufacturer" = "8:Igor Okulist"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:RobustMVCWzInstaller"
+        "Title" = "8:RobustMVC"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Microsoft"
+        "ARPCONTACT" = "8:Igor Okulist"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"

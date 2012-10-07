@@ -1,0 +1,7 @@
+VSWIZARD 7.0
+Wizard=VsWizard.VsWizardEngine.10.0
+
+Param="WIZARD_NAME = RobustMVC"
+Param="WIZARD_UI = FALSE"
+Param="ABSOLUTE_PATH = C:\ProgramData\Igor Okulist\RobustMVC"
+Param="FALLBACK_LCID = 1033"
