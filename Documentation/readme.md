@@ -1,7 +1,8 @@
 <ul class="download">
 <li><a href="Application.zip">Download demo application</a></li>
 <li><a href="Webserver.zip">Download demo web server</a></li>
-<li><a href="robust_mvc.mp4">Download screen-cast of web session</a></li>
+<li><a href="robust_mvc.zip">Download screen-cast of web session</a></li>
+<li><a href="RobustMVCWzInstaller.zip">Download wizard installer</a></li>
 </ul>
 
 
@@ -190,13 +191,28 @@ This section shows snapshots for unit test reports as well as coverage attained 
 
 <img src="coverage.png" width="700"/>
 
+# Installation
+And in conclusion to the best part: all of the above can be reasonably reused though a new Visual Studio **Wizard**. To install you can navigate to the [Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/83b0439b-c380-4d08-992d-efcf7f459f90?SRC=VSIDE), use Visual Studio as shown below or download installer at the top:
+
+Open the new project dialog in Visual Studio.
+Type in the search term: "igor okulist".
+Select the "Robust MVC" item, and proceed installation.
+If everything works, you should see a dialog as the one shown below:
+<a href="http://visualstudiogallery.msdn.microsoft.com/83b0439b-c380-4d08-992d-efcf7f459f90?SRC=VSIDE">
+<img src="extention_manager.png" width="700"/>
+</a>
+
+
+After the installation the new project dialog will have new **Wizard** category:
+<img src="new_project.png" width="700"/>
+
 # Summary
 The article presents key points on implementing and integrating Model-View-Controller framework into existing application development framework. The approach maintains minimal dependencies and facilitates cross platform development. Additionally the same Model-View-Controller implementation is integrated with a web server that allows to the same model \[rendering\] through a web browser.
 
 # FAQ
 
 - Q: Where is the source?!
-- A: Still being prepared. Bookmark, vote or post comments to help me prioritize vs my other hobby projects. By the way contact me if you have experience with making **C++ Wizards** for Visual Studio 2010.
+- A: <strike>Still being prepared. Bookmark, vote or post comments to help me prioritize vs my other hobby projects. By the way contact me if you have experience with making **C++ Wizards** for Visual Studio 2010.</strike> Download the wizard installer and start making new projects based on this framework!
 
 
 
